@@ -20,14 +20,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* --- Improved 3D Background --- */
         #canvas-container { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 
-        /* --- Cursor --- */
         #cursor { width: 6px; height: 6px; background: white; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
         #cursor-follower { width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: transform 0.15s ease-out; }
 
-        /* --- Navigation --- */
         nav {
             position: fixed; top: 1rem; left: 50%; transform: translateX(-50%);
             z-index: 1000; display: flex; gap: 1.5rem; padding: 0.5rem 1.5rem;
@@ -37,48 +34,59 @@
         nav a { color: var(--muted); text-decoration: none; font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s; }
         nav a:hover, nav a.active { color: white; }
 
-        /* --- Hero --- */
         .hero { height: 75vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 6rem); line-height: 0.9; }
         .gradient-text { background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* --- Sections --- */
         section { padding: 20px 6%; max-width: 1200px; margin: 0 auto; }
         
         .filter-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 2rem; flex-wrap: wrap; }
         .filter-btn { background: var(--glass); border: 1px solid var(--glass-border); color: var(--muted); padding: 6px 14px; border-radius: 50px; font-size: 0.7rem; transition: 0.3s; }
         .filter-btn.active { background: white; color: black; border-color: white; }
 
-        /* --- Compact Grid --- */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
-        .card { background: var(--glass); border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); height: 280px; transition: 0.4s; position: relative; }
+        .card { background: #000; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); height: 380px; transition: 0.4s; position: relative; }
         .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card img, .card video { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s; }
-        .card:hover img, .card:hover video { opacity: 1; }
-        .card-info { position: absolute; bottom: 0; width: 100%; padding: 1rem; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+        
+        .card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s; }
+        .card video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+        /* Full Screen Native Player Overlay */
+        #fullscreen-player {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 3000;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            backdrop-filter: blur(20px);
+        }
+        
+        .vid-wrapper { 
+            position: relative; display: flex; align-items: center; justify-content: center; 
+            transition: all 0.5s ease;
+            width: 100%; height: 100%;
+        }
+
+        /* Portrait Container for Video */
+        .portrait-mode video { height: 80vh; max-width: 90vw; border-radius: 10px; }
+
+        .close-player { 
+            position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); 
+            border: none; color: white; width: 45px; height: 45px; border-radius: 50%; 
+            font-size: 1.5rem; z-index: 3001; display: flex; align-items: center; justify-content: center;
+        }
+
+        .card-info { position: absolute; bottom: 10px; width: 100%; padding: 1rem; background: linear-gradient(transparent, rgba(0,0,0,0.9)); pointer-events: none; }
         .card-info h4 { font-size: 0.85rem; font-weight: 600; }
 
-        /* --- Contacts --- */
+        .delete-btn { position: absolute; top: 10px; right: 10px; width: 25px; height: 25px; background: #ef4444; color: white; border: none; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; z-index: 10; }
+
         .contact-footer { border-top: 1px solid var(--glass-border); margin-top: 40px; padding: 30px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 0.75rem; color: var(--muted); }
         .contact-footer a { color: white; text-decoration: none; transition: 0.2s; }
-        .contact-footer a:hover { color: var(--primary); }
 
-        /* --- Minimalist Upload Button --- */
-        .fab { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--muted); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); transition: 0.3s; z-index: 1001; }
-        .fab:hover { background: var(--primary); color: white; transform: rotate(90deg); border-color: var(--primary); }
+        .fab { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--muted); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); z-index: 1001; }
 
-        /* --- Modal --- */
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 2000; }
         .modal-content { background: #08080a; padding: 2rem; border-radius: 20px; width: 90%; max-width: 360px; border: 1px solid var(--glass-border); }
-        .input-group { margin-bottom: 1rem; }
-        label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
-        input, select { width: 100%; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: white; font-size: 0.8rem; outline: none; }
-        .btn-submit { background: var(--primary); color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: 600; font-size: 0.8rem; margin-top: 10px; transition: 0.2s; }
-
-        @media (max-width: 600px) {
-            .contact-footer { flex-direction: column; text-align: center; }
-            .hero h1 { font-size: 3rem; }
-        }
+        input, select { width: 100%; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: white; margin-top: 5px; outline: none; }
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -86,6 +94,13 @@
     <div id="canvas-container"></div>
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
+
+    <div id="fullscreen-player">
+        <button class="close-player" onclick="closePlayer()">×</button>
+        <div class="vid-wrapper portrait-mode">
+            <video id="fullscreen-video" controls playsinline></video>
+        </div>
+    </div>
 
     <nav>
         <a href="#home" class="active">Home</a>
@@ -109,9 +124,7 @@
             <button class="filter-btn" onclick="filterGallery('Designs')">Designs</button>
             <button class="filter-btn" onclick="filterGallery('Developer')">Developer</button>
         </div>
-        
         <div class="portfolio-grid" id="grid"></div>
-        
         <div class="contact-footer">
             <a href="mailto:kazapresent@gmail.com">kazapresent@gmail.com</a>
             <span>WhatsApp: +91 98768 43817</span>
@@ -123,19 +136,15 @@
     <div class="modal" id="uploadModal">
         <div class="modal-content">
             <div id="authArea">
-                <label>Admin Passcode</label>
-                <input type="password" id="passCode" placeholder="••••">
+                <input type="password" id="passCode" placeholder="Passcode ••••">
                 <button class="btn-submit" onclick="checkCode()">Unlock</button>
             </div>
-            
             <div id="uploadArea" style="display: none;">
-                <div class="input-group"><label>Title</label><input type="text" id="title"></div>
-                <div class="input-group"><label>Category</label>
-                    <select id="category">
-                        <option>Images</option><option>Videos</option><option>Thumbnails</option><option>Designs</option><option>Developer</option>
-                    </select>
-                </div>
-                <div class="input-group"><label>File</label><input type="file" id="fileInput" accept="image/*,video/*"></div>
+                <input type="text" id="title" placeholder="Title">
+                <select id="category">
+                    <option>Images</option><option>Videos</option><option>Thumbnails</option><option>Designs</option><option>Developer</option>
+                </select>
+                <input type="file" id="fileInput" accept="image/*,video/*">
                 <button class="btn-submit" id="saveBtn">Publish</button>
             </div>
             <button onclick="closeModal()" style="background:none; border:none; color:var(--muted); margin-top:15px; width:100%; font-size:0.7rem;">Close</button>
@@ -143,14 +152,13 @@
     </div>
 
     <script>
-        // --- PRO 3D BACKGROUND (Stars + Torus) ---
+        // --- 3D BACKGROUND ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Particle Stars
         const starGeo = new THREE.BufferGeometry();
         const starCount = 1500;
         const starPos = new Float32Array(starCount * 3);
@@ -159,11 +167,7 @@
         const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({color: 0xffffff, size: 0.05}));
         scene.add(stars);
 
-        // Rotating Wireframe Torus
-        const knot = new THREE.Mesh(
-            new THREE.TorusKnotGeometry(10, 3, 100, 16),
-            new THREE.MeshPhongMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.15 })
-        );
+        const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(10, 3, 100, 16), new THREE.MeshPhongMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.15 }));
         scene.add(knot);
         scene.add(new THREE.PointLight(0xffffff, 1).clone().translateZ(20));
         camera.position.z = 30;
@@ -172,6 +176,8 @@
         document.addEventListener('mousemove', (e) => {
             mouseX = (e.clientX - window.innerWidth/2) * 0.01;
             mouseY = (e.clientY - window.innerHeight/2) * 0.01;
+            document.getElementById('cursor').style.top = document.getElementById('cursor-follower').style.top = e.clientY + 'px';
+            document.getElementById('cursor').style.left = document.getElementById('cursor-follower').style.left = e.clientX + 'px';
         });
 
         function animate() {
@@ -185,31 +191,63 @@
         }
         animate();
 
-        // --- CORE LOGIC ---
-        function checkCode() {
-            if (document.getElementById('passCode').value === "Kz@547") {
-                document.getElementById('authArea').style.display = 'none';
-                document.getElementById('uploadArea').style.display = 'block';
-            } else { alert("Wrong code"); }
+        // --- VIDEO LOGIC (CHROME STYLE) ---
+        const fsPlayer = document.getElementById('fullscreen-player');
+        const fsVideo = document.getElementById('fullscreen-video');
+
+        function openVideo(src) {
+            fsVideo.src = src;
+            fsPlayer.style.display = 'flex';
+            // Video starts paused and user can hit native Chrome play button
+            fsVideo.load();
         }
 
+        function closePlayer() {
+            fsVideo.pause();
+            fsPlayer.style.display = 'none';
+            fsVideo.src = "";
+        }
+
+        // --- STORAGE & ADMIN ---
+        let isAdmin = false;
         let items = JSON.parse(localStorage.getItem('p_data_final')) || [];
+
+        function checkCode() {
+            if (document.getElementById('passCode').value === "Kz@547") {
+                isAdmin = true;
+                document.getElementById('authArea').style.display = 'none';
+                document.getElementById('uploadArea').style.display = 'block';
+                renderGrid();
+            } else { alert("Denied"); }
+        }
+
         function renderGrid(filter = 'all') {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
             const filtered = filter === 'all' ? items : items.filter(i => i.cat === filter);
-            filtered.forEach(item => {
+            filtered.forEach((item, index) => {
                 const div = document.createElement('div'); div.className = 'card';
-                const media = item.type.includes('video') ? `<video src="${item.src}" autoplay muted loop></video>` : `<img src="${item.src}">`;
-                div.innerHTML = `${media}<div class="card-info"><small style="color:var(--primary); font-size:0.6rem;">${item.cat}</small><h4>${item.title}</h4></div>`;
+                const del = isAdmin ? `<button class="delete-btn" style="display:flex" onclick="deleteItem(${index})">×</button>` : '';
+                
+                if(item.type.includes('video')) {
+                    div.innerHTML = `${del}
+                        <div onclick="openVideo('${item.src}')" style="height:100%; background:#000;">
+                            <video src="${item.src}" playsinline></video>
+                        </div>
+                        <div class="card-info"><small style="color:var(--primary); font-size:0.6rem;">${item.cat}</small><h4>${item.title}</h4></div>`;
+                } else {
+                    div.innerHTML = `${del}<img src="${item.src}"><div class="card-info"><small style="color:var(--primary); font-size:0.6rem;">${item.cat}</small><h4>${item.title}</h4></div>`;
+                }
                 grid.appendChild(div);
             });
         }
 
+        function deleteItem(index) {
+            if(confirm("Delete?")) { items.splice(index, 1); localStorage.setItem('p_data_final', JSON.stringify(items)); renderGrid(); }
+        }
+
         document.getElementById('openModal').onclick = () => {
             document.getElementById('uploadModal').style.display = 'flex';
-            document.getElementById('authArea').style.display = 'block';
-            document.getElementById('uploadArea').style.display = 'none';
         };
         function closeModal() { document.getElementById('uploadModal').style.display = 'none'; }
 
@@ -233,11 +271,6 @@
             event.target.classList.add('active');
             renderGrid(cat);
         }
-
-        document.addEventListener('mousemove', (e) => {
-            document.getElementById('cursor').style.top = document.getElementById('cursor-follower').style.top = e.clientY + 'px';
-            document.getElementById('cursor').style.left = document.getElementById('cursor-follower').style.left = e.clientX + 'px';
-        });
 
         renderGrid();
     </script>
