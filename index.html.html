@@ -1,0 +1,3086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CREATIVE STUDIO | Graphic Designer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+rel="stylesheet">
+<style>
+/*
+* DESIGN SYSTEM & VARIABLES
+*/
+:root {
+--bg-deep: #151515;
+--bg-card: #1e1e1e;
+--bg-elevated: #262626;
+--accent-orange: #FA6A03;
+--accent-brown: #6B4328;
+--accent-caramel: #C9873D;
+--accent-tan: #D9A56E;
+--neutral-cream: #F2E8D8;
+--neutral-white: #FFFFFF;
+--neutral-black: #000000;
+--border-subtle: rgba(242, 232, 216, 0.14);
+--border-highlight: rgba(250, 106, 3, 0.4);
+--font-display: 'Anton', sans-serif;
+--font-body: 'Plus Jakarta Sans', sans-serif;
+--font-mono: 'Space Grotesk', monospace;
+/* Refined Easing Profiles (Apple-style smoothness) */
+--ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-apple: cubic-bezier(0.25, 1, 0.3, 1);
+--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/*
+* RESET & BASE STYLES
+*/
+*, *::before, *::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+html, body {
+width: 100%;
+height: 100%;
+background-color: var(--bg-deep);
+color: var(--neutral-cream);
+font-family: var(--font-body);
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-rendering: optimizeLegibility;
+}
+::selection {
+background-color: var(--accent-orange);
+color: var(--neutral-black);
+}
+
+/* Subtle Grain Overlay */
+.grain-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+pointer-events: none;
+z-index: 999;
+opacity: 0.035;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Cursor */
+.custom-cursor {
+position: fixed;
+top: 0;
+left: 0;
+width: 12px;
+height: 12px;
+background-color: var(--accent-orange);
+border-radius: 50%;
+pointer-events: none;
+z-index: 9999;
+transform: translate(-50%, -50%);
+transition: width 0.35s var(--ease-apple), height 0.35s var(--ease-apple), background-color 0.35s ease;
+mix-blend-mode: difference;
+will-change: transform;
+}
+.custom-cursor-follower {
+position: fixed;
+top: 0;
+left: 0;
+width: 36px;
+height: 36px;
+border: 1px solid rgba(250, 106, 3, 0.4);
+border-radius: 50%;
+pointer-events: none;
+z-index: 9998;
+transform: translate(-50%, -50%);
+transition: width 0.35s var(--ease-apple), height 0.35s var(--ease-apple), border-color 0.35s ease;
+will-change: transform;
+}
+body.hovering-link .custom-cursor {
+width: 24px;
+height: 24px;
+background-color: var(--neutral-cream);
+}
+body.hovering-link .custom-cursor-follower {
+width: 56px;
+height: 56px;
+border-color: var(--accent-orange);
+}
+
+/*
+* NAVIGATION
+*/
+.header-nav {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+padding: 30px 50px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 100;
+background: linear-gradient(to bottom, rgba(21,21,21,0.92) 0%, rgba(21,21,21,0) 100%);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+transition: opacity 0.5s var(--ease-apple), visibility 0.5s var(--ease-apple);
+}
+body.hide-main-nav .header-nav {
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+}
+.brand-logo {
+display: flex;
+align-items: center;
+gap: 12px;
+text-decoration: none;
+color: var(--neutral-cream);
+font-family: var(--font-mono);
+font-weight: 700;
+font-size: 0.9rem;
+letter-spacing: 1px;
+text-transform: uppercase;
+transition: opacity 0.3s ease;
+}
+.brand-logo:hover {
+opacity: 0.85;
+}
+.brand-logo-dot {
+width: 8px;
+height: 8px;
+background-color: var(--accent-orange);
+border-radius: 50%;
+display: inline-block;
+box-shadow: 0 0 10px var(--accent-orange);
+}
+.nav-links {
+display: flex;
+gap: 40px;
+list-style: none;
+align-items: center;
+}
+.nav-link {
+text-decoration: none;
+color: rgba(242, 232, 216, 0.75);
+font-family: var(--font-mono);
+font-size: 0.85rem;
+font-weight: 500;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+position: relative;
+padding: 5px 0;
+transition: color 0.35s var(--ease-apple);
+}
+.nav-link:hover, .nav-link.active {
+color: var(--neutral-cream);
+}
+.nav-link::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 0%;
+height: 2px;
+background-color: var(--accent-orange);
+transition: width 0.35s var(--ease-apple);
+}
+.nav-link:hover::after, .nav-link.active::after {
+width: 100%;
+}
+/* Mobile Menu Toggle */
+.menu-toggle {
+display: none;
+flex-direction: column;
+gap: 6px;
+background: none;
+border: none;
+cursor: pointer;
+padding: 5px;
+}
+.menu-toggle span {
+display: block;
+width: 28px;
+height: 2px;
+background-color: var(--neutral-cream);
+transition: transform 0.35s var(--ease-apple), opacity 0.35s var(--ease-apple);
+}
+
+/*
+* VIEW CONTAINERS (PAGE ROUTING)
+*/
+.view-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+min-height: 100vh;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.7s var(--ease-apple), visibility 0.7s var(--ease-apple);
+will-change: opacity, visibility;
+}
+.view-container.active-view {
+opacity: 1;
+visibility: visible;
+position: relative;
+}
+
+/*
+* HERO SECTION
+*/
+.hero-section {
+min-height: 100vh;
+width: 100%;
+display: grid;
+grid-template-columns: 1.1fr 0.9fr;
+padding: 140px 50px 60px 50px;
+gap: 40px;
+align-items: center;
+position: relative;
+overflow: hidden;
+}
+.hero-bg-grid {
+position: absolute;
+inset: 0;
+background-size: 60px 60px;
+background-image:
+linear-gradient(to right, rgba(242, 232, 216, 0.03) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(242, 232, 216, 0.03) 1px, transparent 1px);
+pointer-events: none;
+z-index: 0;
+}
+.hero-content {
+z-index: 2;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.hero-tag {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+font-family: var(--font-mono);
+font-size: 0.8rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 20px;
+opacity: 0;
+transform: translateY(20px);
+will-change: transform, opacity;
+}
+.hero-tag-line {
+width: 30px;
+height: 1px;
+background-color: var(--accent-orange);
+}
+.hero-title-wrapper {
+margin-bottom: 25px;
+overflow: hidden;
+}
+.hero-title {
+font-family: var(--font-display);
+font-size: clamp(4.5rem, 9vw, 9.5rem);
+line-height: 0.88;
+text-transform: uppercase;
+color: var(--neutral-cream);
+letter-spacing: 0.04em;
+margin: 0;
+}
+.hero-title .char {
+display: inline-block;
+opacity: 0;
+transform: translateY(100px) rotate(4deg);
+transition: transform 0.9s var(--ease-apple), opacity 0.8s ease;
+will-change: transform, opacity;
+}
+.hero-subtitle {
+font-family: var(--font-mono);
+font-size: clamp(1rem, 1.8vw, 1.3rem);
+color: var(--accent-caramel);
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 25px;
+opacity: 0;
+transform: translateY(20px);
+will-change: transform, opacity;
+}
+.hero-description {
+font-size: clamp(1rem, 1.2vw, 1.15rem);
+line-height: 1.65;
+color: rgba(242, 232, 216, 0.82);
+max-width: 520px;
+margin-bottom: 45px;
+font-weight: 400;
+opacity: 0;
+transform: translateY(20px);
+will-change: transform, opacity;
+}
+.hero-actions {
+display: flex;
+align-items: center;
+gap: 25px;
+opacity: 0;
+transform: translateY(20px);
+will-change: transform, opacity;
+}
+.btn-magnetic-wrap {
+display: inline-block;
+position: relative;
+will-change: transform;
+}
+.btn-primary {
+display: inline-flex;
+align-items: center;
+gap: 15px;
+background-color: var(--accent-orange);
+color: var(--neutral-black);
+padding: 18px 36px;
+border-radius: 12px;
+font-family: var(--font-mono);
+font-weight: 700;
+font-size: 0.95rem;
+letter-spacing: 1px;
+text-decoration: none;
+text-transform: uppercase;
+border: 1px solid var(--accent-orange);
+cursor: pointer;
+overflow: hidden;
+position: relative;
+z-index: 1;
+box-shadow: 0 8px 24px rgba(250, 106, 3, 0.2);
+transition: color 0.4s var(--ease-apple), border-color 0.4s ease, transform 0.25s var(--ease-apple), box-shadow 0.35s ease;
+will-change: transform, box-shadow;
+}
+.btn-primary::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: var(--neutral-cream);
+border-radius: 12px;
+transform: scaleX(0);
+transform-origin: right;
+transition: transform 0.45s var(--ease-apple);
+z-index: -1;
+}
+.btn-primary:hover::before {
+transform: scaleX(1);
+transform-origin: left;
+}
+.btn-primary:hover {
+color: var(--neutral-black);
+border-color: var(--neutral-cream);
+box-shadow: 0 12px 30px rgba(242, 232, 216, 0.25);
+}
+.btn-primary .arrow-icon {
+transition: transform 0.35s var(--ease-apple);
+}
+.btn-primary:hover .arrow-icon {
+transform: translateX(6px);
+}
+.btn-secondary {
+display: inline-flex;
+align-items: center;
+color: var(--neutral-cream);
+text-decoration: none;
+font-family: var(--font-mono);
+font-size: 0.85rem;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+padding: 10px 0;
+position: relative;
+transition: color 0.35s var(--ease-apple);
+}
+.btn-secondary::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border-bottom: 1px solid rgba(242, 232, 216, 0.3);
+transition: border-color 0.35s ease;
+}
+.btn-secondary:hover {
+color: var(--accent-orange);
+}
+
+/*
+* HERO VISUAL/FRAME CONTAINER & SEQUENCER
+*/
+.hero-visual-wrapper {
+position: relative;
+z-index: 2;
+display: flex;
+justify-content: center;
+align-items: center;
+opacity: 0;
+transform: translateY(40px) scale(0.96);
+transition: transform 1.1s var(--ease-apple), opacity 0.9s ease;
+will-change: transform, opacity;
+}
+.hero-card-frame {
+width: 100%;
+max-width: 520px;
+aspect-ratio: 4/5;
+background-color: var(--bg-card);
+border-radius: 26px;
+border: 1px solid var(--border-subtle);
+padding: 20px;
+position: relative;
+box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+overflow: hidden;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.art-canvas-container {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+border-radius: 26px;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: var(--bg-card);
+}
+.hero-slider-img {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+padding: 70px 20px 90px 20px;
+opacity: 0;
+transition: opacity 0.6s var(--ease-apple);
+pointer-events: none;
+will-change: opacity;
+}
+.hero-slider-img.active {
+opacity: 1;
+}
+.card-editorial-overlay {
+position: relative;
+z-index: 2;
+pointer-events: none;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.card-top-meta {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-family: var(--font-mono);
+font-size: 0.7rem;
+color: rgba(242, 232, 216, 0.7);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+background: rgba(21, 21, 21, 0.5);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+padding: 10px 16px;
+border-radius: 14px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.card-top-meta .badge-dot {
+width: 6px;
+height: 6px;
+background-color: var(--accent-orange);
+border-radius: 50%;
+display: inline-block;
+margin-right: 6px;
+}
+.card-bottom-meta {
+background: rgba(21, 21, 21, 0.65);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+padding: 20px;
+border-radius: 18px;
+border: 1px solid rgba(255, 255, 255, 0.08);
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+}
+.card-info h3 {
+font-family: var(--font-display);
+font-size: 1.8rem;
+color: var(--neutral-cream);
+letter-spacing: 0.08em;
+line-height: 1;
+margin-bottom: 6px;
+text-transform: uppercase;
+}
+.card-info p {
+font-family: var(--font-mono);
+font-size: 0.75rem;
+color: var(--accent-tan);
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+.card-coord {
+font-family: var(--font-mono);
+font-size: 0.65rem;
+color: rgba(242, 232, 216, 0.4);
+text-align: right;
+line-height: 1.4;
+}
+.floating-badge {
+position: absolute;
+top: -20px;
+right: -20px;
+background-color: var(--accent-orange);
+color: var(--neutral-black);
+font-family: var(--font-mono);
+font-weight: 700;
+font-size: 0.75rem;
+padding: 12px 18px;
+border-radius: 14px;
+box-shadow: 0 10px 20px rgba(250, 106, 3, 0.3);
+z-index: 3;
+text-transform: uppercase;
+letter-spacing: 1px;
+transform: rotate(6deg);
+}
+
+/*
+* WORK VIEW (REVOLVING 3D CATEGORY UI)
+*/
+.revolving-work-view {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+min-height: 100vh;
+width: 100%;
+padding: 100px 20px 40px 20px;
+position: relative;
+overflow: hidden;
+background-color: var(--bg-deep);
+user-select: none;
+}
+.work-header {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+height: 90px;
+padding: 0 50px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 50;
+background: linear-gradient(to bottom, rgba(21,21,21,0.95) 0%, rgba(21,21,21,0) 100%);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+}
+.work-header-title {
+font-family: var(--font-mono);
+font-size: 0.8rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.btn-work-selector-trigger {
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid var(--border-subtle);
+color: var(--neutral-cream);
+padding: 8px 16px;
+border-radius: 12px;
+font-family: var(--font-mono);
+font-size: 0.75rem;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+cursor: pointer;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+transition: all 0.35s var(--ease-apple);
+}
+.btn-work-selector-trigger:hover {
+border-color: var(--accent-orange);
+color: var(--accent-orange);
+background: rgba(250, 106, 3, 0.1);
+transform: translateY(-1px);
+}
+.btn-close-work {
+background: transparent;
+border: 1px solid var(--border-subtle);
+color: var(--neutral-cream);
+padding: 10px 20px;
+border-radius: 12px;
+font-family: var(--font-mono);
+font-size: 0.8rem;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+cursor: pointer;
+transition: all 0.35s var(--ease-apple);
+}
+.btn-close-work:hover {
+border-color: var(--accent-orange);
+color: var(--accent-orange);
+background: rgba(250, 106, 3, 0.08);
+}
+.carousel-stage {
+width: 100%;
+flex-grow: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+perspective: 1400px;
+position: relative;
+z-index: 10;
+}
+.carousel-track {
+position: relative;
+width: 100%;
+max-width: 1200px;
+height: 480px;
+display: flex;
+justify-content: center;
+align-items: center;
+transform-style: preserve-3d;
+}
+.category-card {
+position: absolute;
+width: 320px;
+height: 440px;
+background-color: var(--bg-card);
+border: 1px solid var(--border-subtle);
+border-radius: 22px;
+padding: 24px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
+transform-style: preserve-3d;
+transition: transform 0.5s var(--ease-cinematic), opacity 0.5s var(--ease-cinematic), border-color 0.4s ease, filter 0.5s var(--ease-cinematic), box-shadow 0.4s ease;
+will-change: transform, opacity, filter;
+cursor: pointer;
+}
+.category-card.active {
+border-color: var(--border-highlight);
+box-shadow: 0 30px 60px rgba(250, 106, 3, 0.15), 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+.card-category-header {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+}
+.card-category-title {
+font-family: var(--font-display);
+font-size: 1.6rem;
+color: var(--neutral-cream);
+letter-spacing: 0.05em;
+text-transform: uppercase;
+line-height: 1;
+}
+.card-category-index {
+font-family: var(--font-mono);
+font-size: 0.75rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 1px;
+}
+.empty-placeholder-area {
+width: 100%;
+flex-grow: 1;
+margin: 18px 0;
+background-color: var(--bg-elevated);
+border: 1px dashed rgba(242, 232, 216, 0.15);
+border-radius: 14px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 10px;
+position: relative;
+overflow: hidden;
+transition: border-color 0.35s ease, background-color 0.35s ease;
+}
+.category-card.active .empty-placeholder-area {
+border-color: rgba(250, 106, 3, 0.3);
+background-color: #212121;
+}
+.placeholder-icon {
+width: 32px;
+height: 32px;
+opacity: 0.3;
+}
+.placeholder-text {
+font-family: var(--font-mono);
+font-size: 0.65rem;
+color: rgba(242, 232, 216, 0.4);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+}
+.card-category-footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-family: var(--font-mono);
+font-size: 0.7rem;
+color: rgba(242, 232, 216, 0.5);
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+.card-status-dot {
+width: 6px;
+height: 6px;
+background-color: var(--accent-orange);
+border-radius: 50%;
+display: inline-block;
+}
+.work-nav-controls {
+display: flex;
+align-items: center;
+gap: 40px;
+z-index: 20;
+margin-top: 20px;
+}
+.btn-carousel-control {
+background: var(--bg-card);
+border: 1px solid var(--border-subtle);
+color: var(--neutral-cream);
+padding: 14px 28px;
+border-radius: 14px;
+font-family: var(--font-mono);
+font-size: 0.85rem;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+cursor: pointer;
+transition: all 0.35s var(--ease-apple);
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.btn-carousel-control:hover {
+border-color: var(--accent-orange);
+color: var(--accent-orange);
+transform: translateY(-2px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+.btn-carousel-control:active {
+transform: translateY(0);
+}
+.carousel-indicator {
+font-family: var(--font-mono);
+font-size: 0.8rem;
+color: rgba(242, 232, 216, 0.5);
+letter-spacing: 2px;
+}
+.carousel-indicator .current-num {
+color: var(--accent-orange);
+font-weight: 700;
+}
+
+/*
+* NEW PORTFOLIO PAGE PANEL (LET'S SEE) — CONTINUOUS LONG PAGE SCROLL
+*/
+#orbitShowcaseView {
+overflow-y: auto;
+overflow-x: hidden;
+scroll-behavior: smooth;
+height: 100vh;
+width: 100%;
+background-color: var(--bg-deep);
+}
+.portfolio-page-container {
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 120px 20px 80px 20px;
+gap: 80px;
+}
+.portfolio-page-section {
+min-height: calc(100vh - 160px);
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+opacity: 0;
+transform: translateY(40px);
+transition: opacity 0.85s var(--ease-apple), transform 0.85s var(--ease-apple);
+will-change: opacity, transform;
+}
+.portfolio-page-section.is-visible {
+opacity: 1;
+transform: translateY(0);
+}
+.orbit-frame-card {
+width: min(100%, 142.222vh);
+max-width: 100%;
+aspect-ratio: 16 / 9;
+height: auto;
+max-height: none;
+padding: 0;
+overflow: hidden;
+background-color: var(--bg-card);
+border: 1px solid var(--border-subtle);
+border-radius: 26px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s var(--ease-apple);
+will-change: transform;
+}
+.orbit-frame-card:hover {
+border-color: var(--border-highlight);
+box-shadow: 0 40px 80px rgba(250, 106, 3, 0.15), 0 15px 40px rgba(0, 0, 0, 0.8);
+transform: translateY(-4px);
+}
+.orbit-card-inner {
+width: 100%;
+height: 100%;
+background-color: var(--bg-elevated);
+border: 1px dashed rgba(242, 232, 216, 0.15);
+border-radius: 18px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 12px;
+transition: border-color 0.35s ease, background-color 0.35s ease;
+}
+.orbit-frame-card:hover .orbit-card-inner {
+border-color: rgba(250, 106, 3, 0.3);
+background-color: #212121;
+}
+.orbit-placeholder-title {
+font-family: var(--font-display);
+font-size: clamp(3.5rem, 8vw, 7rem);
+color: var(--neutral-cream);
+letter-spacing: 0.08em;
+text-transform: uppercase;
+}
+
+/*
+* EV IN-LINE ACTION BUTTON WRAPPER & STYLING
+*/
+.portfolio-action-section {
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px 0;
+opacity: 0;
+transform: translateY(40px);
+transition: opacity 0.85s var(--ease-apple), transform 0.85s var(--ease-apple);
+will-change: opacity, transform;
+}
+.portfolio-action-section.is-visible {
+opacity: 1;
+transform: translateY(0);
+}
+.btn-portfolio-view-work {
+padding: 22px 50px;
+font-size: 1.15rem;
+letter-spacing: 2px;
+white-space: nowrap;
+box-shadow: 0 15px 35px rgba(250, 106, 3, 0.25);
+}
+
+@media (max-width: 1024px) {
+.orbit-frame-card {
+padding: 0;
+height: auto;
+aspect-ratio: 16 / 9;
+}
+}
+@media (max-width: 768px) {
+.orbit-frame-card {
+padding: 0;
+aspect-ratio: 16 / 9;
+}
+.orbit-placeholder-title {
+font-size: 3rem;
+}
+.portfolio-page-container {
+padding-top: 100px;
+gap: 50px;
+}
+.work-header {
+padding: 0 25px;
+}
+.btn-portfolio-view-work {
+padding: 18px 36px;
+font-size: 0.95rem;
+}
+}
+
+/*
+* NEW CATEGORY CONTENT GALLERY PANEL & MEDIA VIEWER
+*/
+.category-gallery-view {
+min-height: 100vh;
+width: 100%;
+background-color: var(--bg-deep);
+padding: 120px 50px 80px 50px;
+display: flex;
+flex-direction: column;
+position: relative;
+overflow-y: auto;
+z-index: 150;
+}
+.gallery-header-section {
+margin-bottom: 40px;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+flex-wrap: wrap;
+gap: 20px;
+}
+.gallery-cat-title {
+font-family: var(--font-display);
+font-size: clamp(3rem, 6vw, 5.5rem);
+color: var(--neutral-cream);
+letter-spacing: 0.05em;
+text-transform: uppercase;
+line-height: 0.95;
+margin-bottom: 12px;
+}
+.gallery-cat-meta {
+font-family: var(--font-mono);
+font-size: 0.85rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.gallery-grid-container {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 30px;
+width: 100%;
+margin-top: 10px;
+}
+.gallery-content-card {
+background-color: var(--bg-card);
+border: 1px solid var(--border-subtle);
+border-radius: 18px;
+overflow: hidden;
+cursor: pointer;
+transition: border-color 0.35s ease, transform 0.4s var(--ease-apple), box-shadow 0.4s ease;
+display: flex;
+flex-direction: column;
+will-change: transform;
+}
+.gallery-content-card:hover {
+border-color: var(--border-highlight);
+transform: translateY(-6px);
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(250, 106, 3, 0.1);
+}
+.gallery-thumb-wrapper {
+position: relative;
+width: 100%;
+aspect-ratio: 16/10;
+background-color: var(--bg-elevated);
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 12px;
+border-bottom: 1px solid var(--border-subtle);
+}
+.gallery-thumb-img {
+max-width: 100%;
+max-height: 100%;
+width: auto;
+height: auto;
+object-fit: contain;
+transition: transform 0.6s var(--ease-apple);
+border-radius: 8px;
+border: 1px solid rgba(242, 232, 216, 0.1);
+will-change: transform;
+}
+.gallery-content-card:hover .gallery-thumb-img {
+transform: scale(1.03);
+}
+.gallery-thumb-placeholder {
+font-family: var(--font-mono);
+font-size: 0.75rem;
+color: rgba(242, 232, 216, 0.3);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+}
+.gallery-play-overlay {
+position: absolute;
+inset: 0;
+background: rgba(21, 21, 21, 0.4);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+transition: opacity 0.35s var(--ease-apple);
+will-change: opacity;
+}
+.gallery-content-card:hover .gallery-play-overlay {
+opacity: 1;
+}
+.gallery-play-btn {
+width: 50px;
+height: 50px;
+background-color: var(--accent-orange);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--neutral-black);
+font-size: 1.1rem;
+box-shadow: 0 8px 20px rgba(250, 106, 3, 0.4);
+transform: scale(0.8);
+transition: transform 0.35s var(--ease-apple);
+will-change: transform;
+}
+.gallery-content-card:hover .gallery-play-btn {
+transform: scale(1);
+}
+.gallery-card-info {
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+.gallery-card-title {
+font-family: var(--font-display);
+font-size: 1.25rem;
+color: var(--neutral-cream);
+letter-spacing: 0.04em;
+text-transform: uppercase;
+line-height: 1.2;
+}
+.gallery-card-desc {
+font-size: 0.88rem;
+color: rgba(242, 232, 216, 0.72);
+font-weight: 400;
+line-height: 1.5;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+
+/* MEDIA VIEWER MODAL */
+.media-viewer-backdrop {
+position: fixed;
+inset: 0;
+background-color: rgba(12, 12, 12, 0.92);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+z-index: 10000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 40px;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.4s var(--ease-apple), visibility 0.4s var(--ease-apple);
+will-change: opacity, visibility;
+}
+.media-viewer-backdrop.active {
+opacity: 1;
+visibility: visible;
+}
+.media-viewer-container {
+width: 100%;
+max-width: 1100px;
+background-color: var(--bg-card);
+border: 1px solid var(--border-subtle);
+border-radius: 22px;
+overflow: hidden;
+box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+display: flex;
+flex-direction: column;
+position: relative;
+transform: scale(0.95);
+transition: transform 0.45s var(--ease-apple);
+will-change: transform;
+}
+.media-viewer-backdrop.active .media-viewer-container {
+transform: scale(1);
+}
+.media-viewer-close {
+position: absolute;
+top: 20px;
+right: 20px;
+background: rgba(21, 21, 21, 0.6);
+border: 1px solid rgba(255, 255, 255, 0.1);
+color: var(--neutral-cream);
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+z-index: 10;
+font-size: 1.2rem;
+transition: all 0.35s var(--ease-apple);
+}
+.media-viewer-close:hover {
+background-color: var(--accent-orange);
+color: var(--neutral-black);
+border-color: var(--accent-orange);
+}
+.media-viewer-content-box {
+width: 100%;
+aspect-ratio: 16/9;
+background-color: #0d0d0d;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+overflow: hidden;
+}
+.media-viewer-content-box video, 
+.media-viewer-content-box iframe, 
+.media-viewer-content-box img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+border: none;
+}
+.media-viewer-details {
+padding: 25px 30px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+background-color: var(--bg-card);
+border-top: 1px solid var(--border-subtle);
+}
+.media-viewer-title {
+font-family: var(--font-display);
+font-size: 1.8rem;
+color: var(--neutral-cream);
+letter-spacing: 0.05em;
+text-transform: uppercase;
+}
+.media-viewer-desc {
+font-size: 0.95rem;
+color: rgba(242, 232, 216, 0.8);
+font-weight: 400;
+line-height: 1.6;
+}
+
+/*
+* SPLIT-SCREEN POSTER VIEWER MODAL STYLES
+*/
+.poster-viewer-container {
+width: 100%;
+max-width: 1280px;
+height: 85vh;
+max-height: 850px;
+background-color: var(--bg-card);
+border: 1px solid var(--border-subtle);
+border-radius: 22px;
+overflow: hidden;
+box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+display: flex;
+flex-direction: row;
+position: relative;
+transform: scale(0.95);
+transition: transform 0.45s var(--ease-apple);
+will-change: transform;
+}
+.media-viewer-backdrop.active .poster-viewer-container {
+transform: scale(1);
+}
+.poster-left-canvas {
+width: 45%;
+height: 100%;
+background-color: #121212;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+padding: 30px;
+border-right: 1px solid var(--border-subtle);
+overflow: hidden;
+}
+.poster-artwork-img {
+max-width: 100%;
+max-height: 100%;
+width: auto;
+height: auto;
+object-fit: contain;
+border-radius: 10px;
+border: 1px solid rgba(242, 232, 216, 0.15);
+box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+.poster-bv1-placeholder {
+width: 100%;
+height: 100%;
+border: 2px dashed rgba(242, 232, 216, 0.18);
+border-radius: 14px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: #181818;
+gap: 12px;
+}
+.poster-bv1-title {
+font-family: var(--font-display);
+font-size: 4rem;
+color: var(--neutral-cream);
+letter-spacing: 0.08em;
+line-height: 1;
+}
+.poster-bv1-subtitle {
+font-family: var(--font-mono);
+font-size: 0.75rem;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.poster-right-panel {
+width: 55%;
+height: 100%;
+overflow-y: auto;
+padding: 40px;
+display: flex;
+flex-direction: column;
+gap: 32px;
+background-color: var(--bg-card);
+}
+.poster-header-group {
+display: flex;
+flex-direction: column;
+gap: 8px;
+padding-bottom: 20px;
+border-bottom: 1px solid var(--border-subtle);
+}
+.poster-meta-category {
+font-family: var(--font-mono);
+font-size: 0.75rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.poster-modal-title {
+font-family: var(--font-display);
+font-size: 2.2rem;
+color: var(--neutral-cream);
+letter-spacing: 0.04em;
+text-transform: uppercase;
+line-height: 1.1;
+}
+.poster-description-text {
+font-size: 0.95rem;
+line-height: 1.65;
+color: rgba(242, 232, 216, 0.85);
+font-weight: 400;
+}
+.poster-section-block {
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+.poster-section-heading {
+font-family: var(--font-mono);
+font-size: 0.8rem;
+font-weight: 600;
+color: var(--accent-tan);
+letter-spacing: 2px;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.poster-section-heading::after {
+content: '';
+flex-grow: 1;
+height: 1px;
+background-color: var(--border-subtle);
+}
+.poster-elements-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.poster-element-item {
+font-size: 0.9rem;
+line-height: 1.55;
+color: rgba(242, 232, 216, 0.88);
+display: flex;
+align-items: flex-start;
+gap: 10px;
+}
+.poster-element-bullet {
+color: var(--accent-orange);
+font-family: var(--font-mono);
+font-weight: 700;
+}
+.poster-palette-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+}
+.poster-swatch-card {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 10px 14px;
+background-color: var(--bg-elevated);
+border: 1px solid var(--border-subtle);
+border-radius: 12px;
+}
+.poster-swatch-box {
+width: 28px;
+height: 28px;
+border-radius: 8px;
+border: 1px solid rgba(255, 255, 255, 0.15);
+flex-shrink: 0;
+}
+.poster-swatch-info {
+display: flex;
+flex-direction: column;
+}
+.poster-swatch-name {
+font-size: 0.8rem;
+font-weight: 600;
+color: var(--neutral-cream);
+}
+.poster-swatch-hex {
+font-family: var(--font-mono);
+font-size: 0.7rem;
+color: rgba(242, 232, 216, 0.55);
+letter-spacing: 1px;
+}
+.poster-formula-list {
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+.poster-formula-item {
+font-size: 0.88rem;
+line-height: 1.55;
+color: rgba(242, 232, 216, 0.85);
+background: rgba(242, 232, 216, 0.03);
+padding: 12px 16px;
+border-radius: 10px;
+border-left: 3px solid var(--accent-orange);
+}
+.poster-formula-item strong {
+color: var(--neutral-cream);
+font-weight: 600;
+}
+.poster-time-tag {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 12px 20px;
+background-color: rgba(250, 106, 3, 0.1);
+border: 1px solid rgba(250, 106, 3, 0.3);
+border-radius: 100px;
+width: fit-content;
+font-family: var(--font-mono);
+font-size: 0.8rem;
+color: var(--accent-orange);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+font-weight: 600;
+}
+.poster-metadata-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 16px;
+padding-top: 10px;
+border-top: 1px solid var(--border-subtle);
+}
+.poster-meta-item {
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+.poster-meta-label {
+font-family: var(--font-mono);
+font-size: 0.68rem;
+color: rgba(242, 232, 216, 0.45);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+}
+.poster-meta-value {
+font-family: var(--font-mono);
+font-size: 0.85rem;
+color: var(--neutral-cream);
+font-weight: 500;
+}
+
+@media (max-width: 900px) {
+.poster-viewer-container {
+flex-direction: column;
+height: 90vh;
+max-height: none;
+overflow-y: auto;
+}
+.poster-left-canvas {
+width: 100%;
+height: 320px;
+flex-shrink: 0;
+border-right: none;
+border-bottom: 1px solid var(--border-subtle);
+padding: 20px;
+}
+.poster-right-panel {
+width: 100%;
+height: auto;
+overflow-y: visible;
+padding: 25px 20px;
+}
+.poster-palette-grid {
+grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 768px) {
+.category-gallery-view {
+padding: 100px 20px 40px 20px;
+}
+.gallery-grid-container {
+grid-template-columns: 1fr;
+gap: 20px;
+}
+.media-viewer-backdrop {
+padding: 15px;
+}
+.media-viewer-details {
+padding: 18px 20px;
+}
+.media-viewer-title {
+font-size: 1.4rem;
+}
+}
+
+/*
+* FOOTER / SYSTEM MARKS
+*/
+.hero-footer-meta {
+position: absolute;
+bottom: 30px;
+left: 50px;
+right: 50px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-family: var(--font-mono);
+font-size: 0.7rem;
+color: rgba(242, 232, 216, 0.4);
+letter-spacing: 1px;
+text-transform: uppercase;
+pointer-events: none;
+z-index: 2;
+}
+
+/*
+* ABOUT SECTION — PREMIUM FROSTED GLASS UI
+*/
+.contact-modal-backdrop {
+position: fixed;
+inset: 0;
+background-color: rgba(12, 12, 12, 0.82);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.45s var(--ease-apple), visibility 0.45s var(--ease-apple);
+will-change: opacity, visibility;
+}
+.contact-modal-backdrop.active {
+opacity: 1;
+visibility: visible;
+}
+.contact-modal-card {
+background: linear-gradient(135deg, rgba(38, 38, 38, 0.85) 0%, rgba(26, 26, 26, 0.95) 100%);
+backdrop-filter: blur(24px);
+-webkit-backdrop-filter: blur(24px);
+border: 1px solid rgba(242, 232, 216, 0.16);
+border-radius: 26px;
+padding: 48px 42px;
+width: 100%;
+max-width: 500px;
+max-height: 85vh;
+overflow-y: auto;
+position: relative;
+box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+transform: scale(0.94);
+transition: transform 0.45s var(--ease-apple), border-color 0.3s ease;
+will-change: transform;
+}
+.contact-modal-card:hover {
+border-color: rgba(250, 106, 3, 0.25);
+}
+.about-card-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-family: var(--font-mono);
+font-size: 0.72rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 12px;
+background: rgba(250, 106, 3, 0.08);
+padding: 6px 12px;
+border-radius: 100px;
+border: 1px solid rgba(250, 106, 3, 0.2);
+}
+.about-card-badge-dot {
+width: 6px;
+height: 6px;
+background-color: var(--accent-orange);
+border-radius: 50%;
+display: inline-block;
+}
+.about-modal-text {
+font-size: 0.96rem;
+line-height: 1.7;
+color: rgba(242, 232, 216, 0.88);
+font-weight: 400;
+margin-bottom: 18px;
+letter-spacing: 0.1px;
+}
+.about-modal-text:last-child {
+margin-bottom: 0;
+}
+.contact-modal-backdrop.active .contact-modal-card {
+transform: scale(1);
+}
+.contact-modal-close {
+position: absolute;
+top: 24px;
+right: 24px;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+color: rgba(242, 232, 216, 0.7);
+font-size: 1.3rem;
+cursor: pointer;
+line-height: 1;
+width: 36px;
+height: 36px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+.contact-modal-close:hover {
+color: var(--neutral-cream);
+background-color: rgba(250, 106, 3, 0.15);
+border-color: var(--accent-orange);
+transform: scale(1.05);
+}
+.contact-modal-header {
+margin-bottom: 28px;
+}
+.contact-modal-title {
+font-family: var(--font-display);
+font-size: 2.4rem;
+letter-spacing: 0.05em;
+color: var(--neutral-cream);
+text-transform: uppercase;
+line-height: 1;
+margin-bottom: 8px;
+}
+.contact-modal-title-line {
+width: 32px;
+height: 2px;
+background-color: var(--accent-orange);
+margin-top: 12px;
+border-radius: 2px;
+}
+
+/*
+* CONTACT SECTION — PREMIUM UI WITH WHATSAPP-ONLY PHONE CONTACT
+*/
+.contact-modal-body {
+display: flex;
+flex-direction: column;
+gap: 16px;
+}
+.contact-card-item {
+display: flex;
+align-items: center;
+gap: 18px;
+padding: 16px 20px;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(242, 232, 216, 0.08);
+border-radius: 16px;
+text-decoration: none;
+transition: background 0.35s var(--ease-apple), border-color 0.35s var(--ease-apple), transform 0.35s var(--ease-apple);
+}
+a.contact-card-item:hover {
+background: rgba(250, 106, 3, 0.08);
+border-color: rgba(250, 106, 3, 0.3);
+transform: translateY(-2px);
+}
+.contact-card-icon-wrap {
+width: 44px;
+height: 44px;
+border-radius: 14px;
+background: rgba(242, 232, 216, 0.05);
+border: 1px solid rgba(242, 232, 216, 0.1);
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--accent-orange);
+flex-shrink: 0;
+transition: background 0.3s ease, border-color 0.3s ease;
+}
+a.contact-card-item:hover .contact-card-icon-wrap {
+background: var(--accent-orange);
+border-color: var(--accent-orange);
+color: var(--neutral-black);
+}
+.contact-card-content {
+display: flex;
+flex-direction: column;
+gap: 3px;
+overflow: hidden;
+}
+.contact-info-label {
+font-family: var(--font-mono);
+font-size: 0.68rem;
+font-weight: 600;
+letter-spacing: 1.5px;
+color: var(--accent-orange);
+text-transform: uppercase;
+}
+.contact-info-value {
+font-family: var(--font-mono);
+font-size: 0.98rem;
+color: var(--neutral-cream);
+font-weight: 500;
+letter-spacing: 0.5px;
+text-decoration: none;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+transition: color 0.3s ease;
+}
+
+/*
+* WORK SELECTOR MODAL
+*/
+.work-selector-backdrop {
+position: fixed;
+inset: 0;
+background-color: rgba(12, 12, 12, 0.85);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+z-index: 10050;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.4s var(--ease-apple), visibility 0.4s var(--ease-apple);
+will-change: opacity, visibility;
+}
+.work-selector-backdrop.active {
+opacity: 1;
+visibility: visible;
+}
+.work-selector-modal {
+background: linear-gradient(135deg, rgba(38, 38, 38, 0.92) 0%, rgba(24, 24, 24, 0.98) 100%);
+backdrop-filter: blur(24px);
+-webkit-backdrop-filter: blur(24px);
+border: 1px solid rgba(242, 232, 216, 0.16);
+border-radius: 26px;
+padding: 36px;
+width: 100%;
+max-width: 680px;
+max-height: 85vh;
+display: flex;
+flex-direction: column;
+gap: 24px;
+position: relative;
+box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+transform: scale(0.94);
+transition: transform 0.4s var(--ease-apple);
+will-change: transform;
+}
+.work-selector-backdrop.active .work-selector-modal {
+transform: scale(1);
+}
+.work-selector-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-bottom: 16px;
+border-bottom: 1px solid var(--border-subtle);
+}
+.work-selector-title-group {
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+.work-selector-tag {
+font-family: var(--font-mono);
+font-size: 0.7rem;
+font-weight: 600;
+color: var(--accent-orange);
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.work-selector-title {
+font-family: var(--font-display);
+font-size: 1.8rem;
+color: var(--neutral-cream);
+letter-spacing: 0.05em;
+text-transform: uppercase;
+line-height: 1;
+}
+.work-selector-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+gap: 12px;
+overflow-y: auto;
+padding-right: 6px;
+max-height: 480px;
+}
+/* Custom Scrollbar for selector grid */
+.work-selector-grid::-webkit-scrollbar {
+width: 6px;
+}
+.work-selector-grid::-webkit-scrollbar-track {
+background: rgba(255,255,255,0.02);
+border-radius: 10px;
+}
+.work-selector-grid::-webkit-scrollbar-thumb {
+background: rgba(242,232,216,0.15);
+border-radius: 10px;
+}
+.work-selector-grid::-webkit-scrollbar-thumb:hover {
+background: var(--accent-orange);
+}
+.category-option-btn {
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(242, 232, 216, 0.08);
+border-radius: 14px;
+padding: 12px 16px;
+color: rgba(242, 232, 216, 0.8);
+font-family: var(--font-mono);
+font-size: 0.78rem;
+font-weight: 500;
+letter-spacing: 0.5px;
+text-align: left;
+cursor: pointer;
+transition: all 0.3s var(--ease-apple);
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.category-option-btn:hover {
+background: rgba(250, 106, 3, 0.08);
+border-color: rgba(250, 106, 3, 0.3);
+color: var(--neutral-cream);
+transform: translateY(-1px);
+}
+.category-option-btn.selected {
+background: var(--accent-orange);
+border-color: var(--accent-orange);
+color: var(--neutral-black);
+font-weight: 700;
+box-shadow: 0 4px 15px rgba(250, 106, 3, 0.3);
+}
+.category-option-btn.selected .cat-count-pill {
+background: rgba(0, 0, 0, 0.2);
+color: var(--neutral-black);
+}
+.cat-count-pill {
+font-size: 0.68rem;
+padding: 2px 7px;
+border-radius: 100px;
+background: rgba(255, 255, 255, 0.08);
+color: var(--accent-tan);
+}
+
+/* Reduced Motion Accessibility Guard */
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+scroll-behavior: auto !important;
+}
+.hero-title .char,
+.hero-tag,
+.hero-subtitle,
+.hero-description,
+.hero-actions,
+.hero-visual-wrapper {
+opacity: 1 !important;
+transform: none !important;
+}
+}
+
+/*
+* RESPONSIVE DESIGN
+*/
+@media (max-width: 1024px) {
+.hero-section {
+grid-template-columns: 1fr;
+padding-top: 120px;
+gap: 50px;
+}
+.hero-content {
+align-items: flex-start;
+}
+.hero-footer-meta {
+display: none;
+}
+.category-card {
+width: 280px;
+height: 400px;
+}
+}
+@media (max-width: 768px) {
+.header-nav {
+padding: 20px 25px;
+}
+.hero-section {
+padding: 110px 25px 40px 25px;
+}
+.nav-links {
+display: none;
+}
+.menu-toggle {
+display: flex;
+}
+.hero-title {
+font-size: clamp(3.8rem, 15vw, 6rem);
+}
+.hero-actions {
+flex-direction: column;
+align-items: stretch;
+width: 100%;
+}
+.btn-primary, .btn-secondary {
+justify-content: center;
+}
+.floating-badge {
+right: 10px;
+top: -15px;
+}
+.contact-modal-card {
+padding: 35px 25px;
+}
+.work-header {
+padding: 0 20px;
+}
+.work-selector-modal {
+padding: 25px 20px;
+}
+.work-selector-grid {
+grid-template-columns: 1fr;
+}
+.category-card {
+width: 240px;
+height: 360px;
+padding: 18px;
+}
+.card-category-title {
+font-size: 1.3rem;
+}
+.work-nav-controls {
+gap: 20px;
+}
+.btn-carousel-control {
+padding: 10px 20px;
+font-size: 0.75rem;
+}
+}
+</style>
+</head>
+<body>
+<div class="grain-overlay"></div>
+<div class="custom-cursor" id="cursor"></div>
+<div class="custom-cursor-follower" id="cursorFollower"></div>
+<header class="header-nav">
+<a href="#" class="brand-logo" id="navBrand">
+<span class="brand-logo-dot"></span>
+STUDIO // CREATIVE
+</a>
+<ul class="nav-links">
+<li><a href="#work" class="nav-link interactive" data-route="work">Work</a></li>
+<li><a href="#about" class="nav-link interactive" data-route="about">About</a></li>
+<li><a href="#contact" class="nav-link interactive" data-route="contact">Contact</a></li>
+</ul>
+<button class="menu-toggle interactive" aria-label="Toggle Menu">
+<span></span>
+<span></span>
+</button>
+</header>
+
+<main class="view-container active-view" id="heroView">
+<div class="hero-bg-grid"></div>
+<section class="hero-section">
+<div class="hero-content">
+<div class="hero-tag" id="heroTag">
+<span class="hero-tag-line"></span>
+<span>Portfolio 2026</span>
+</div>
+<div class="hero-title-wrapper">
+<h1 class="hero-title" id="heroTitle">
+PORTFOLIO
+</h1>
+</div>
+<div class="hero-subtitle" id="heroSubtitle">
+GRAPHIC DESIGNER &bull; VISUAL DESIGN &bull; BRANDING
+</div>
+<p class="hero-description" id="heroDesc">
+Designing visual identities, digital experiences and bold ideas that make brands impossible to ignore.
+</p>
+<div class="hero-actions" id="heroActions">
+<div class="btn-magnetic-wrap">
+<button class="btn-primary interactive" id="btnLetsGo">
+<span>LET'S SEE</span>
+<span class="arrow-icon">&rarr;</span>
+</button>
+</div>
+<a href="#work" class="btn-secondary interactive" id="btnViewWork" data-route="work">
+VIEW WORK
+</a>
+</div>
+</div>
+<div class="hero-visual-wrapper" id="heroVisual">
+<div class="floating-badge">SELECTED WORK</div>
+<div class="hero-card-frame">
+<div class="art-canvas-container">
+<img src="https://lh3.googleusercontent.com/d/1sCLYGNGLChhrhrSkHId5LHRzKby_iebM" class="hero-slider-img active" alt="Portfolio Preview 1">
+<img src="https://lh3.googleusercontent.com/d/15k55l5Ulazgov-92v8Bb7qrL4f5kAyAs" class="hero-slider-img" alt="Portfolio Preview 2">
+<img src="https://lh3.googleusercontent.com/d/1zejlR20tXEmTZ4q30C9Su5Tc-g7yPT60" class="hero-slider-img" alt="Portfolio Preview 3">
+</div>
+<div class="card-editorial-overlay">
+<div class="card-top-meta">
+<span><span class="badge-dot"></span>VISUAL IDENTITY</span>
+<span>01/05</span>
+</div>
+<div class="card-bottom-meta">
+<div class="card-info">
+<h3>PARMEET KUMAR</h3>
+<p>GRAPHIC DESIGNER</p>
+</div>
+<div class="card-coord">
+34.0522° N<br>118.2437° W
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="hero-footer-meta">
+<span>[SYSTEM: ACTIVE]</span>
+<span>GRAPHIC DESIGN DIRECTION DIGITAL ART</span>
+<span>SCROLL TO EXPLORE</span>
+</div>
+</main>
+
+<section class="view-container" id="destinationView">
+<div class="hero-bg-grid"></div>
+<div class="revolving-work-view">
+<div class="work-header">
+<div class="work-header-title">
+<span>// ARCHIVE &bull; CATEGORIES</span>
+<button class="btn-work-selector-trigger interactive" id="btnOpenSelectorFromWork">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<span>SELECT TYPE</span>
+</button>
+</div>
+<button class="btn-close-work interactive" id="btnBack">&times; CLOSE</button>
+</div>
+<div class="carousel-stage" id="carouselStage">
+<div class="carousel-track" id="carouselTrack"></div>
+</div>
+<div class="work-nav-controls">
+<button class="btn-carousel-control interactive" id="btnPrevCategory">&larr; PREVIOUS</button>
+<div class="carousel-indicator" id="carouselIndicator">
+<span class="current-num" id="currentCatNum">01</span>/<span id="totalCatNum">05</span>
+</div>
+<button class="btn-carousel-control interactive" id="btnNextCategory">NEXT &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- CATEGORY CONTENT GALLERY PANEL -->
+<section class="view-container" id="categoryGalleryView">
+<div class="hero-bg-grid"></div>
+<div class="category-gallery-view">
+<div class="work-header">
+<div class="work-header-title">
+<span>// ARCHIVE &bull; <span id="galleryHeaderCategoryName">POSTERS</span></span>
+</div>
+<button class="btn-close-work interactive" id="btnBackToCarousel">&larr; BACK TO CATEGORIES</button>
+</div>
+<div class="gallery-header-section">
+<div>
+<h2 class="gallery-cat-title" id="galleryCatTitle">POSTERS</h2>
+<div class="gallery-cat-meta" id="galleryCatCount">0 PROJECTS AVAILABLE</div>
+</div>
+</div>
+<div class="gallery-grid-container" id="galleryGridContainer">
+<!-- Dynamic Content Thumbnails Rendered Here -->
+</div>
+</div>
+</section>
+
+<!-- MEDIA & POSTER VIEWER MODAL -->
+<div class="media-viewer-backdrop" id="mediaViewerModal">
+<div class="media-viewer-container" id="standardMediaContainer">
+<button class="media-viewer-close interactive" id="btnCloseMediaViewer" aria-label="Close Viewer">&times;</button>
+<div class="media-viewer-content-box" id="mediaViewerBox"></div>
+<div class="media-viewer-details">
+<h3 class="media-viewer-title" id="mediaViewerTitle">Project Title</h3>
+<p class="media-viewer-desc" id="mediaViewerDesc">Project Description</p>
+</div>
+</div>
+<div class="poster-viewer-container" id="posterMediaContainer" style="display: none;">
+<button class="media-viewer-close interactive" id="btnClosePosterViewer" aria-label="Close Poster Viewer">&times;</button>
+<div class="poster-left-canvas" id="posterLeftCanvas"></div>
+<div class="poster-right-panel" id="posterRightPanel"></div>
+</div>
+</div>
+
+<!-- WORK SELECTOR MODAL -->
+<div class="work-selector-backdrop" id="workSelectorModal">
+<div class="work-selector-modal">
+<div class="work-selector-header">
+<div class="work-selector-title-group">
+<span class="work-selector-tag">// EXPLORE CATEGORIES</span>
+<h2 class="work-selector-title">SELECT TYPE OF WORK</h2>
+</div>
+<button class="contact-modal-close interactive" id="btnCloseWorkSelector" aria-label="Close Selector">&times;</button>
+</div>
+<div class="work-selector-grid" id="workSelectorGrid">
+<!-- Dynamic Selector Options rendered by JS -->
+</div>
+</div>
+</div>
+
+<section class="view-container" id="orbitShowcaseView">
+<div class="hero-bg-grid"></div>
+<div class="work-header">
+<div class="work-header-title">// PORTFOLIO SHOWCASE &bull; COLLECTION</div>
+<button class="btn-close-work interactive" id="btnBackOrbit">&times; CLOSE</button>
+</div>
+<div class="portfolio-page-container" id="portfolioPageContainer"></div>
+</section>
+
+<!-- ABOUT MODAL (PREMIUM FROSTED GLASS UI) -->
+<div class="contact-modal-backdrop" id="aboutModal">
+<div class="contact-modal-card">
+<button class="contact-modal-close interactive" id="btnCloseAbout" aria-label="Close About Modal">&times;</button>
+<div class="about-card-badge">
+<span class="about-card-badge-dot"></span>
+<span>VISUAL CREATIVE</span>
+</div>
+<div class="contact-modal-header">
+<h2 class="contact-modal-title">ABOUT ME</h2>
+<div class="contact-modal-title-line"></div>
+</div>
+<div class="contact-modal-body">
+<p class="about-modal-text">Hi, I'm Parmeet, a Graphic Designer with a strong interest in creative design, visual communication, and brand identity. I enjoy turning ideas into clean, attractive, and meaningful designs that help brands and businesses present themselves professionally.</p>
+<p class="about-modal-text">I can create a wide range of design work, including social media posts, posters, banners, YouTube thumbnails, logos, digital artwork, promotional graphics, and other visual content. I also work on complete brand-building projects, from creating a visual identity and logo to designing supporting materials such as T-shirts, social media graphics, promotional designs, and more.</p>
+<p class="about-modal-text">My goal is to create designs that are not only visually appealing but also communicate the right message and represent the personality of a brand.</p>
+<p class="about-modal-text">If you need help with a design project, brand identity, or complete branding work, feel free to get in touch. I'm always open to new ideas, creative projects, and opportunities to work together.</p>
+<p class="about-modal-text">For any queries, project discussions, or design requirements, you can contact me at <a href="mailto:kazapresent@gmail.com" class="contact-info-value interactive">kazapresent@gmail.com</a>.</p>
+</div>
+</div>
+</div>
+
+<!-- CONTACT MODAL (PREMIUM UI WITH WHATSAPP-ONLY PHONE CONTACT) -->
+<div class="contact-modal-backdrop" id="contactModal">
+<div class="contact-modal-card">
+<button class="contact-modal-close interactive" id="btnCloseContact" aria-label="Close Contact Modal">&times;</button>
+<div class="about-card-badge">
+<span class="about-card-badge-dot"></span>
+<span>GET IN TOUCH</span>
+</div>
+<div class="contact-modal-header">
+<h2 class="contact-modal-title">CONTACT</h2>
+<div class="contact-modal-title-line"></div>
+</div>
+<div class="contact-modal-body">
+<a href="https://wa.me/919876843817" target="_blank" rel="noopener noreferrer" class="contact-card-item interactive">
+<div class="contact-card-icon-wrap">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+</svg>
+</div>
+<div class="contact-card-content">
+<span class="contact-info-label">WHATSAPP</span>
+<span class="contact-info-value">+91 9876843817</span>
+</div>
+</a>
+
+<a href="mailto:parmeetkumar1708@gmail.com" class="contact-card-item interactive">
+<div class="contact-card-icon-wrap">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+<polyline points="22,6 12,13 2,6"/>
+</svg>
+</div>
+<div class="contact-card-content">
+<span class="contact-info-label">EMAIL</span>
+<span class="contact-info-value">parmeetkumar1708@gmail.com</span>
+</div>
+</a>
+
+<a href="https://www.instagram.com/_kaza_studio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="contact-card-item interactive">
+<div class="contact-card-icon-wrap">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+</svg>
+</div>
+<div class="contact-card-content">
+<span class="contact-info-label">INSTAGRAM</span>
+<span class="contact-info-value">_kaza_studio</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+/*
+* 1. CUSTOM CURSOR & MAGNETIC EFFECT
+*/
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursorFollower');
+let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+let followerX = mouseX, followerY = mouseY;
+document.addEventListener('mousemove', (e) => {
+mouseX = e.clientX;
+mouseY = e.clientY;
+cursor.style.transform = `translate3d(${mouseX - 6}px, ${mouseY - 6}px, 0)`;
+}, { passive: true });
+
+function renderCursorFollower() {
+followerX += (mouseX - followerX) * 0.18;
+followerY += (mouseY - followerY) * 0.18;
+follower.style.transform = `translate3d(${followerX - 18}px, ${followerY - 18}px, 0)`;
+requestAnimationFrame(renderCursorFollower);
+}
+requestAnimationFrame(renderCursorFollower);
+
+function attachCursorEvents() {
+const interactives = document.querySelectorAll('.interactive, a, button, .category-card, .orbit-frame-card, .gallery-content-card, .category-option-btn');
+interactives.forEach(el => {
+el.removeEventListener('mouseenter', addHover);
+el.removeEventListener('mouseleave', removeHover);
+el.addEventListener('mouseenter', addHover);
+el.addEventListener('mouseleave', removeHover);
+});
+}
+function addHover() { document.body.classList.add('hovering-link'); }
+function removeHover() { document.body.classList.remove('hovering-link'); }
+attachCursorEvents();
+
+// Magnetic Button Effect
+const magneticWrap = document.querySelector('.btn-magnetic-wrap');
+if (magneticWrap) {
+magneticWrap.addEventListener('mousemove', (e) => {
+const rect = magneticWrap.getBoundingClientRect();
+const relX = e.clientX - rect.left - rect.width / 2;
+const relY = e.clientY - rect.top - rect.height / 2;
+magneticWrap.style.transform = `translate3d(${relX * 0.25}px, ${relY * 0.25}px, 0)`;
+}, { passive: true });
+magneticWrap.addEventListener('mouseleave', () => {
+magneticWrap.style.transform = 'translate3d(0px, 0px, 0)';
+magneticWrap.style.transition = 'transform 0.5s var(--ease-apple)';
+});
+magneticWrap.addEventListener('mouseenter', () => {
+magneticWrap.style.transition = 'none';
+});
+}
+
+/*
+* 2. TITLE CHARACTER SPLITTING & ENTRY ANIMATION
+*/
+const titleEl = document.getElementById('heroTitle');
+const titleText = titleEl.textContent.trim();
+titleEl.innerHTML = '';
+Array.from(titleText).forEach(char => {
+const span = document.createElement('span');
+span.classList.add('char');
+span.textContent = char === ' ' ? '\u00A0' : char;
+titleEl.appendChild(span);
+});
+
+function triggerHeroEntryAnimation() {
+const chars = document.querySelectorAll('.hero-title .char');
+const heroTag = document.getElementById('heroTag');
+const heroSubtitle = document.getElementById('heroSubtitle');
+const heroDesc = document.getElementById('heroDesc');
+const heroActions = document.getElementById('heroActions');
+const heroVisual = document.getElementById('heroVisual');
+
+setTimeout(() => {
+heroTag.style.transition = 'all 0.85s var(--ease-apple)';
+heroTag.style.opacity = '1';
+heroTag.style.transform = 'translateY(0)';
+}, 100);
+
+chars.forEach((char, index) => {
+setTimeout(() => {
+char.style.opacity = '1';
+char.style.transform = 'translateY(0) rotate(0deg)';
+}, 220 + (index * 35));
+});
+
+setTimeout(() => {
+heroSubtitle.style.transition = 'all 0.85s var(--ease-apple)';
+heroSubtitle.style.opacity = '1';
+heroSubtitle.style.transform = 'translateY(0)';
+}, 580);
+
+setTimeout(() => {
+heroDesc.style.transition = 'all 0.85s var(--ease-apple)';
+heroDesc.style.opacity = '1';
+heroDesc.style.transform = 'translateY(0)';
+}, 720);
+
+setTimeout(() => {
+heroActions.style.transition = 'all 0.85s var(--ease-apple)';
+heroActions.style.opacity = '1';
+heroActions.style.transform = 'translateY(0)';
+}, 860);
+
+setTimeout(() => {
+heroVisual.style.opacity = '1';
+heroVisual.style.transform = 'translateY(0) scale(1)';
+}, 1000);
+}
+triggerHeroEntryAnimation();
+
+/*
+* 3. HERO IMAGE SEQUENCER
+*/
+const heroImages = document.querySelectorAll('.hero-slider-img');
+let currentHeroImgIndex = 0;
+if (heroImages.length > 0) {
+setInterval(() => {
+heroImages[currentHeroImgIndex].classList.remove('active');
+currentHeroImgIndex = (currentHeroImgIndex + 1) % heroImages.length;
+heroImages[currentHeroImgIndex].classList.add('active');
+}, 4000);
+}
+
+/*
+* 4. ROUTING & NAVIGATION BEHAVIOR
+*/
+const heroView = document.getElementById('heroView');
+const destinationView = document.getElementById('destinationView');
+const categoryGalleryView = document.getElementById('categoryGalleryView');
+const orbitShowcaseView = document.getElementById('orbitShowcaseView');
+const btnBack = document.getElementById('btnBack');
+const btnBackOrbit = document.getElementById('btnBackOrbit');
+const btnBackToCarousel = document.getElementById('btnBackToCarousel');
+const btnLetsGo = document.getElementById('btnLetsGo');
+const navLinks = document.querySelectorAll('.nav-link[data-route="work"], #btnViewWork');
+
+function navigateToDestination() {
+document.body.classList.remove('hide-main-nav');
+heroView.classList.remove('active-view');
+orbitShowcaseView.classList.remove('active-view');
+categoryGalleryView.classList.remove('active-view');
+setTimeout(() => {
+destinationView.classList.add('active-view');
+window.scrollTo({ top: 0, behavior: 'smooth' });
+updateCarouselLayout();
+}, 400);
+}
+
+function navigateToOrbitShowcase() {
+document.body.classList.add('hide-main-nav');
+heroView.classList.remove('active-view');
+destinationView.classList.remove('active-view');
+categoryGalleryView.classList.remove('active-view');
+setTimeout(() => {
+orbitShowcaseView.classList.add('active-view');
+orbitShowcaseView.scrollTop = 0;
+}, 400);
+}
+
+function navigateToHero() {
+document.body.classList.remove('hide-main-nav');
+destinationView.classList.remove('active-view');
+orbitShowcaseView.classList.remove('active-view');
+categoryGalleryView.classList.remove('active-view');
+setTimeout(() => {
+heroView.classList.add('active-view');
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}, 400);
+}
+
+function navigateToCategoryGallery(categoryName) {
+document.body.classList.add('hide-main-nav');
+destinationView.classList.remove('active-view');
+setTimeout(() => {
+categoryGalleryView.classList.add('active-view');
+renderCategoryGallery(categoryName);
+categoryGalleryView.scrollTop = 0;
+}, 400);
+}
+
+btnBack.addEventListener('click', (e) => {
+e.preventDefault();
+navigateToHero();
+});
+btnBackOrbit.addEventListener('click', (e) => {
+e.preventDefault();
+navigateToHero();
+});
+btnBackToCarousel.addEventListener('click', (e) => {
+e.preventDefault();
+navigateToDestination();
+});
+btnLetsGo.addEventListener('click', (e) => {
+e.preventDefault();
+navigateToOrbitShowcase();
+});
+navLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault();
+navigateToDestination();
+});
+});
+document.getElementById('navBrand').addEventListener('click', (e) => {
+e.preventDefault();
+navigateToHero();
+});
+
+/*
+* DATA-DRIVEN CATEGORY CONTENT STORAGE
+*/
+const categoryWorkData = {
+"POSTERS": [
+{
+title: "NEXORA M16 — Mechanical Pencil Campaign",
+desc: "A premium product advertisement concept for the NEXORA M16 mechanical pencil, built around precision, durability, comfort, and practical everyday use.",
+thumbnail: "https://lh3.googleusercontent.com/d/1zfDxj2sSGotX1C80Fh_PUQpSzCWeOdWC",
+detailImage: "https://lh3.googleusercontent.com/d/1zfDxj2sSGotX1C80Fh_PUQpSzCWeOdWC",
+type: "image",
+filterCat: "Product Advertisements",
+timeSpent: "ESTIMATED TIME — 45 MINUTES",
+overview: "The composition uses a light grey background and bold diagonal blue shapes to create movement and direct attention towards the main product. The large pencil render dominates the composition, while a secondary close-up near the bottom highlights its construction and grip.",
+designElements: ["Large, angled mechanical pencil as the primary focal point.", "Secondary product close-up for additional detail.", "Diagonal blue geometric shapes that add energy."],
+palette: [{ name: "Electric Blue", hex: "#1D4F91" }, { name: "Technical Grey", hex: "#BBBBBB" }, { name: "Charcoal Black", hex: "#25282C" }],
+designFormula: ["Oversized product render + directional geometric shapes + technical iconography."],
+metadata: { projectType: "Product Advertising", designFocus: "Typography & Product Hierarchy", technique: "Bold condensed sans-serif", status: "Active Portfolio Concept" }
+},
+{
+title: "Pistachio Gelato — Flashpop Product Promotion",
+desc: "A visually focused dessert advertisement built around the creamy texture and fresh green appearance of pistachio gelato.",
+thumbnail: "https://lh3.googleusercontent.com/d/1fDKLSdxhnj6l2KRIDl9_TCC8DLiryWJo",
+detailImage: "https://lh3.googleusercontent.com/d/1fDKLSdxhnj6l2KRIDl9_TCC8DLiryWJo",
+type: "image",
+filterCat: "Product Advertisements",
+timeSpent: "ESTIMATED TIME — 40 MINUTES",
+overview: "The composition is divided into two contrasting vertical sections. A deep forest-green area on the left carries oversized vertical lettering, while the lighter sage-green area on the right contains promotional info.",
+designElements: ["Central pistachio gelato cup.", "Oversized vertical product typography.", "Forest-green and sage-green division."],
+palette: [{ name: "Forest Green", hex: "#25412A" }, { name: "Pale Sage", hex: "#CBD6BC" }, { name: "Soft Cream", hex: "#E9EDDF" }],
+designFormula: ["Two-tone green layout + central product photography + vertical lettering."],
+metadata: { projectType: "Food & Beverage Advertising", designFocus: "Vertical Contrast", technique: "Condensed uppercase typography", status: "Active Portfolio Concept" }
+},
+{
+title: "Spider-Man — Cinematic Character Poster",
+desc: "A dramatic superhero poster concept featuring Spider-Man in a dynamic action pose.",
+thumbnail: "https://lh3.googleusercontent.com/d/1u2WpJ3Pi8yOgePfjeIGMOvHN_ax0-sTL",
+detailImage: "https://lh3.googleusercontent.com/d/1u2WpJ3Pi8yOgePfjeIGMOvHN_ax0-sTL",
+type: "image",
+filterCat: "Posters & Flyers",
+timeSpent: "ESTIMATED TIME — 50 MINUTES",
+overview: "The intense red background establishes the overall mood, with darker crimson shapes forming a large spider motif. The enormous headline sits behind the character, creating depth through overlapping elements.",
+designElements: ["Central Spider-Man character cutout.", "Oversized uppercase title typography.", "Diagonal web strands."],
+palette: [{ name: "Hero Red", hex: "#B9090B" }, { name: "Deep Crimson", hex: "#520101" }, { name: "Near Black", hex: "#08090D" }],
+designFormula: ["Hero character cutout + oversized background typography + high-contrast red palette."],
+metadata: { projectType: "Entertainment Poster", designFocus: "Layered Depth", technique: "Condensed uppercase lettering", status: "Active Portfolio Concept" }
+},
+{
+title: "GUCCI — House of Gucci Editorial Poster",
+desc: "A fashion-led editorial poster concept inspired by the visual language of luxury branding and cinema.",
+thumbnail: "https://lh3.googleusercontent.com/d/1_2CrRnaENty598Lwf7DS4igwy-_ILIw7",
+detailImage: "https://lh3.googleusercontent.com/d/1_2CrRnaENty598Lwf7DS4igwy-_ILIw7",
+type: "image",
+filterCat: "Editorial & Layout Design",
+timeSpent: "ESTIMATED TIME — 45 MINUTES",
+overview: "The poster is divided into two major vertical zones. The left side features a close-up fashion portrait against a deep blue background, while the right side uses a vivid orange panel as a contrasting feature.",
+designElements: ["Fashion portrait on left.", "Bright orange vertical panel.", "Oversized vertical GUCCI wordmark."],
+palette: [{ name: "Vivid Orange", hex: "#E86F08" }, { name: "Royal Blue", hex: "#05236D" }, { name: "Near Black", hex: "#101016" }],
+designFormula: ["Editorial portrait + vertical colour block + luxury wordmark."],
+metadata: { projectType: "Luxury Fashion Editorial", designFocus: "Color Blocking", technique: "Elegant serif typography", status: "Active Portfolio Concept" }
+},
+{
+title: "NEXORA M16 — Mechanical Pencil Range Advertisement",
+desc: "A product-range advertisement presenting the M16 mechanical pencil through a coordinated display of colour variations.",
+thumbnail: "https://lh3.googleusercontent.com/d/11bwiwmiFNUfVRseeyMAEb3hkx5TqevBc",
+detailImage: "https://lh3.googleusercontent.com/d/11bwiwmiFNUfVRseeyMAEb3hkx5TqevBc",
+type: "image",
+filterCat: "Product Advertisements",
+timeSpent: "ESTIMATED TIME — 40 MINUTES",
+overview: "The charcoal background keeps attention on the pencil bodies. A row of product variations appears along the top, while matching lower product views create a symmetrical display arrangement.",
+designElements: ["Multiple pencil colour variations.", "Central title bar.", "Technical geometric linework."],
+palette: [{ name: "Charcoal Grey", hex: "#343434" }, { name: "Product Blue", hex: "#4778B8" }, { name: "Accent Orange", hex: "#E85B23" }],
+designFormula: ["Organised product lineup + dark background + technical graphics."],
+metadata: { projectType: "Product-Line Showcase", designFocus: "Technical Precision", technique: "Condensed sans-serif", status: "Active Portfolio Concept" }
+},
+{
+title: "Delicious Burger — Burger Bash Promotion",
+desc: "A high-impact food-promotion poster centred on a large, appetising burger image.",
+thumbnail: "https://lh3.googleusercontent.com/d/1DPX51CTGUGRNGx1QqIhXXAcWv5-u-IwI",
+detailImage: "https://lh3.googleusercontent.com/d/1DPX51CTGUGRNGx1QqIhXXAcWv5-u-IwI",
+type: "image",
+filterCat: "Advertising Creatives",
+timeSpent: "ESTIMATED TIME — 40 MINUTES",
+overview: "The large burger dominates almost the entire composition. A yellow 50% OFF badge occupies the top-left corner, immediately communicating the offer.",
+designElements: ["Large detailed burger image.", "Yellow discount badge.", "Layered script and bold headline."],
+palette: [{ name: "Pure Black", hex: "#000000" }, { name: "Golden Yellow", hex: "#DFB83E" }, { name: "Warm Orange", hex: "#C5440D" }],
+designFormula: ["Hero food photography + dark background + discount badge."],
+metadata: { projectType: "Fast-Food Promotion", designFocus: "Focal Dominance", technique: "Heavy rounded sans-serif + script", status: "Active Portfolio Concept" }
+},
+{
+title: "Construction Services — Corporate Promotional Poster",
+desc: "A professional construction-services promotional poster designed to communicate capability and reliability.",
+thumbnail: "https://lh3.googleusercontent.com/d/1ZXO8f8ulc6AQE5lOpHhHhnf6zUZQK5Ou",
+detailImage: "https://lh3.googleusercontent.com/d/1ZXO8f8ulc6AQE5lOpHhHhnf6zUZQK5Ou",
+type: "image",
+filterCat: "Posters & Flyers",
+timeSpent: "ESTIMATED TIME — 50 MINUTES",
+overview: "The off-white textured background keeps the information area bright and readable, while charcoal geometric panels provide structure.",
+designElements: ["Bold CONSTRUCTION SERVICES headline.", "Construction-site photo.", "Service list with icons."],
+palette: [{ name: "Off-White", hex: "#F0EFEC" }, { name: "Charcoal", hex: "#2B2524" }, { name: "Orange", hex: "#F07810" }],
+designFormula: ["Service headline + construction imagery + icon list."],
+metadata: { projectType: "Corporate Construction Poster", designFocus: "Structural Grid", technique: "Bold condensed sans-serif", status: "Active Portfolio Concept" }
+},
+{
+title: "Built to Last — Construction, Design & Development",
+desc: "A conceptual construction and architecture poster that combines architectural geometry and technical details.",
+thumbnail: "https://lh3.googleusercontent.com/d/1tyKYCmqhlwP-hryxN_o__QcxOPyQHvwl",
+detailImage: "https://lh3.googleusercontent.com/d/1tyKYCmqhlwP-hryxN_o__QcxOPyQHvwl",
+type: "image",
+filterCat: "Posters & Flyers",
+timeSpent: "ESTIMATED TIME — 45 MINUTES",
+overview: "The poster is framed by a pale cream border surrounding a burnt-orange and ochre-yellow composition with geometric arch illustrations.",
+designElements: ["BUILT TO LAST headline.", "Architectural arch illustration.", "Technical measurement lines."],
+palette: [{ name: "Burnt Orange", hex: "#C75827" }, { name: "Ochre Yellow", hex: "#D69C31" }, { name: "Warm Cream", hex: "#E8D0A3" }],
+designFormula: ["Condensed headline + architectural illustration + distressed print texture."],
+metadata: { projectType: "Architecture Concept Poster", designFocus: "Blueprint Aesthetics", technique: "Tall condensed uppercase", status: "Active Portfolio Concept" }
+},
+{
+title: "The Deep Reach — Conceptual Editorial Poster",
+desc: "A minimalist conceptual poster titled THE DEEP REACH using a limited teal-and-orange palette and abstract shapes.",
+thumbnail: "https://lh3.googleusercontent.com/d/1i7zF1m4DMJhL1EZ6MVHwWsZkmG5Ksoye",
+detailImage: "https://lh3.googleusercontent.com/d/1i7zF1m4DMJhL1EZ6MVHwWsZkmG5Ksoye",
+type: "image",
+filterCat: "Editorial & Layout Design",
+timeSpent: "ESTIMATED TIME — 40 MINUTES",
+overview: "A deep teal background provides generous negative space, while a burnt-orange abstract form extends from the right with silhouetted figures.",
+designElements: ["Cream title THE DEEP REACH.", "Deep teal background.", "Burnt orange abstract structure."],
+palette: [{ name: "Deep Teal", hex: "#0E5D6A" }, { name: "Burnt Orange", hex: "#B75F21" }, { name: "Warm Ivory", hex: "#F3EBCB" }],
+designFormula: ["Minimal two-colour composition + strong negative space + abstract silhouette."],
+metadata: { projectType: "Conceptual Editorial Design", designFocus: "Negative Space", technique: "Condensed sans-serif", status: "Active Portfolio Concept" }
+}
+],
+"PACKAGING": [
+{ title: "Luxury Beverage Packaging", desc: "Premium minimalist packaging design for artisanal product.", thumbnail: "", videoSrc: "", type: "video", filterCat: "Packaging Design" }
+],
+"SOCIAL MEDIA": [
+{ title: "Campaign Social Suite", desc: "Cohesive multi-platform graphics for promotional rollout.", thumbnail: "", videoSrc: "", type: "video", filterCat: "Social Media Designs" }
+],
+"LOGO DESIGN": [
+{ title: "Logo Identity Suite", desc: "Professional logo design and mark architecture for modern brands.", thumbnail: "", videoSrc: "", type: "video", filterCat: "Logo Design" }
+],
+"BRANDING": [
+{ title: "Brand Identity Concept 01", desc: "Comprehensive brand guideline, logo suite, and collateral design.", thumbnail: "", videoSrc: "", type: "video", filterCat: "Brand Identity" },
+{ title: "Corporate Design System", desc: "Modern visual strategy and stationery kit for tech enterprise.", thumbnail: "", videoSrc: "", type: "video", filterCat: "Brand Identity" },
+{ title: "Apparel Brand Direction", desc: "Full lifestyle apparel identity and visual merchandise showcase.", thumbnail: "", videoSrc: "", type: "video", filterCat: "Branding Applications" }
+]
+};
+
+function renderCategoryGallery(catName) {
+const galleryHeaderCategoryName = document.getElementById('galleryHeaderCategoryName');
+const galleryCatTitle = document.getElementById('galleryCatTitle');
+const galleryCatCount = document.getElementById('galleryCatCount');
+const galleryGridContainer = document.getElementById('galleryGridContainer');
+
+galleryHeaderCategoryName.textContent = catName;
+galleryCatTitle.textContent = catName;
+
+const items = categoryWorkData[catName] || [];
+
+galleryCatCount.textContent = `${items.length} PROJECT${items.length === 1 ? '' : 'S'} AVAILABLE`;
+galleryGridContainer.innerHTML = '';
+
+if (items.length === 0) {
+galleryGridContainer.innerHTML = `
+<div style="grid-column: 1/-1; text-align: center; padding: 80px 20px; font-family: var(--font-mono); color: rgba(242, 232, 216, 0.5);">
+<div style="font-size: 1.2rem; margin-bottom: 8px; color: var(--accent-tan);">MORE PROJECTS COMING SOON</div>
+<div style="font-size: 0.8rem; letter-spacing: 1px;">NO PROJECTS FOUND UNDER "${catName}".</div>
+</div>
+`;
+return;
+}
+
+items.forEach((item) => {
+const card = document.createElement('div');
+card.className = 'gallery-content-card interactive';
+const isPoster = (catName === "POSTERS" || item.type === "image");
+const actionLabel = isPoster ? "VIEW IMAGE" : "PLAY VIDEO";
+const actionIcon = isPoster ? `
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>` : "&#9654;";
+
+card.innerHTML = `
+<div class="gallery-thumb-wrapper">
+${item.thumbnail ? `<img src="${item.thumbnail}" class="gallery-thumb-img" alt="${item.title}">` : `
+<div class="gallery-thumb-placeholder">
+<svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+<rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="1.5"></rect>
+<circle cx="8.5" cy="8.5" r="1.5" stroke-width="1.5"></circle>
+<polyline points="21 15 16 10 5 21" stroke-width="1.5"></polyline>
+</svg>
+<span>THUMBNAIL</span>
+</div>
+`}
+<div class="gallery-play-overlay">
+<div class="gallery-play-btn" style="${isPoster ? 'border-radius:100px; width:auto; height:auto; padding:10px 18px; gap:8px; display:flex; font-size:0.8rem; font-family:var(--font-mono); font-weight:700; letter-spacing:1px;' : ''}">
+${actionIcon}
+<span>${actionLabel}</span>
+</div>
+</div>
+</div>
+<div class="gallery-card-info">
+<h3 class="gallery-card-title">${item.title}</h3>
+<p class="gallery-card-desc">${item.desc}</p>
+</div>
+`;
+card.addEventListener('click', () => {
+if (isPoster) {
+openPosterDetailViewer(item);
+} else {
+openMediaViewer(item);
+}
+});
+galleryGridContainer.appendChild(card);
+});
+attachCursorEvents();
+}
+
+/* WORK SELECTOR MODAL (Main view selector) */
+const workSelectorModal = document.getElementById('workSelectorModal');
+const btnCloseWorkSelector = document.getElementById('btnCloseWorkSelector');
+const workSelectorGrid = document.getElementById('workSelectorGrid');
+const btnOpenSelectorFromWork = document.getElementById('btnOpenSelectorFromWork');
+
+const selectableCategories = Object.keys(categoryWorkData);
+
+function buildWorkSelectorUI() {
+workSelectorGrid.innerHTML = '';
+selectableCategories.forEach(cat => {
+const count = (categoryWorkData[cat] || []).length;
+const btn = document.createElement('button');
+btn.className = `category-option-btn interactive`;
+btn.innerHTML = `
+<span>${cat}</span>
+<span class="cat-count-pill">${count}</span>
+`;
+btn.addEventListener('click', () => {
+closeWorkSelector();
+navigateToCategoryGallery(cat);
+});
+workSelectorGrid.appendChild(btn);
+});
+attachCursorEvents();
+}
+
+function openWorkSelector() {
+buildWorkSelectorUI();
+workSelectorModal.classList.add('active');
+}
+
+function closeWorkSelector() {
+workSelectorModal.classList.remove('active');
+}
+
+if (btnOpenSelectorFromWork) {
+btnOpenSelectorFromWork.addEventListener('click', openWorkSelector);
+}
+if (btnCloseWorkSelector) {
+btnCloseWorkSelector.addEventListener('click', closeWorkSelector);
+}
+if (workSelectorModal) {
+workSelectorModal.addEventListener('click', (e) => {
+if (e.target === workSelectorModal) closeWorkSelector();
+});
+}
+
+/* MEDIA VIEWER MODAL LOGIC */
+const mediaViewerModal = document.getElementById('mediaViewerModal');
+const btnCloseMediaViewer = document.getElementById('btnCloseMediaViewer');
+const btnClosePosterViewer = document.getElementById('btnClosePosterViewer');
+const standardMediaContainer = document.getElementById('standardMediaContainer');
+const posterMediaContainer = document.getElementById('posterMediaContainer');
+const mediaViewerBox = document.getElementById('mediaViewerBox');
+const mediaViewerTitle = document.getElementById('mediaViewerTitle');
+const mediaViewerDesc = document.getElementById('mediaViewerDesc');
+
+function openMediaViewer(item) {
+standardMediaContainer.style.display = 'flex';
+posterMediaContainer.style.display = 'none';
+mediaViewerTitle.textContent = item.title;
+mediaViewerDesc.textContent = item.desc;
+mediaViewerBox.innerHTML = '';
+if (item.videoSrc) {
+if (item.videoSrc.includes('youtube.com') || item.videoSrc.includes('vimeo.com')) {
+const iframe = document.createElement('iframe');
+iframe.src = item.videoSrc + (item.videoSrc.includes('?') ? '&autoplay=1' : '?autoplay=1');
+iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+iframe.allowFullscreen = true;
+mediaViewerBox.appendChild(iframe);
+} else {
+const video = document.createElement('video');
+video.src = item.videoSrc;
+video.controls = true;
+video.autoplay = true;
+mediaViewerBox.appendChild(video);
+}
+} else if (item.thumbnail) {
+const img = document.createElement('img');
+img.src = item.thumbnail;
+img.alt = item.title;
+mediaViewerBox.appendChild(img);
+} else {
+mediaViewerBox.innerHTML = `<div style="font-family: var(--font-mono); color: rgba(242, 232, 216, 0.4); text-transform: uppercase; letter-spacing: 2px;">[ MEDIA CONTENT PREVIEW ]</div>`;
+}
+mediaViewerModal.classList.add('active');
+}
+
+function openPosterDetailViewer(item) {
+standardMediaContainer.style.display = 'none';
+posterMediaContainer.style.display = 'flex';
+
+const leftCanvas = document.getElementById('posterLeftCanvas');
+const rightPanel = document.getElementById('posterRightPanel');
+
+const imgSrc = item.detailImage || item.thumbnail;
+if (imgSrc && imgSrc.trim() !== "") {
+leftCanvas.innerHTML = `<img src="${imgSrc}" class="poster-artwork-img" alt="${item.title}">`;
+} else {
+leftCanvas.innerHTML = `
+<div class="poster-bv1-placeholder">
+<span class="poster-bv1-title">BV1</span>
+<span class="poster-bv1-subtitle">POSTER ARTWORK PREVIEW</span>
+</div>
+`;
+}
+
+let swatchesHtml = '';
+if (item.palette && item.palette.length > 0) {
+swatchesHtml = item.palette.map(sw => `
+<div class="poster-swatch-card">
+<div class="poster-swatch-box" style="background-color: ${sw.hex};"></div>
+<div class="poster-swatch-info">
+<span class="poster-swatch-name">${sw.name}</span>
+<span class="poster-swatch-hex">${sw.hex}</span>
+</div>
+</div>
+`).join('');
+}
+
+let elementsHtml = '';
+if (item.designElements && item.designElements.length > 0) {
+elementsHtml = item.designElements.map(el => `
+<li class="poster-element-item">
+<span class="poster-element-bullet">&bull;</span>
+<span>${el}</span>
+</li>
+`).join('');
+}
+
+let formulaHtml = '';
+if (item.designFormula && item.designFormula.length > 0) {
+formulaHtml = item.designFormula.map(fm => `
+<div class="poster-formula-item">${fm}</div>
+`).join('');
+}
+
+const meta = item.metadata || {};
+const metaHtml = `
+<div class="poster-meta-item">
+<span class="poster-meta-label">PROJECT CATEGORY</span>
+<span class="poster-meta-value">${meta.projectType || 'Poster Design'}</span>
+</div>
+<div class="poster-meta-item">
+<span class="poster-meta-label">DESIGN FOCUS</span>
+<span class="poster-meta-value">${meta.designFocus || 'Visual Layout'}</span>
+</div>
+<div class="poster-meta-item">
+<span class="poster-meta-label">TYPOGRAPHY / TECHNIQUE</span>
+<span class="poster-meta-value">${meta.technique || 'Digital Composition'}</span>
+</div>
+<div class="poster-meta-item">
+<span class="poster-meta-label">DESIGN INTENT</span>
+<span class="poster-meta-value">${meta.status || 'Active Portfolio Item'}</span>
+</div>
+`;
+
+rightPanel.innerHTML = `
+<div class="poster-header-group">
+<span class="poster-meta-category">CATEGORY // POSTERS</span>
+<h2 class="poster-modal-title">${item.title}</h2>
+<p class="poster-description-text">${item.desc}</p>
+</div>
+
+${item.timeSpent ? `<div class="poster-time-tag">⏱ ${item.timeSpent}</div>` : ''}
+
+${item.overview ? `
+<div class="poster-section-block">
+<h3 class="poster-section-heading">DESIGN DIRECTION</h3>
+<p class="poster-description-text">${item.overview}</p>
+</div>
+` : ''}
+
+${elementsHtml ? `
+<div class="poster-section-block">
+<h3 class="poster-section-heading">KEY VISUAL ELEMENTS</h3>
+<ul class="poster-elements-list">${elementsHtml}</ul>
+</div>
+` : ''}
+
+${swatchesHtml ? `
+<div class="poster-section-block">
+<h3 class="poster-section-heading">COLOUR PALETTE</h3>
+<div class="poster-palette-grid">${swatchesHtml}</div>
+</div>
+` : ''}
+
+${formulaHtml ? `
+<div class="poster-section-block">
+<h3 class="poster-section-heading">DESIGN FORMULA</h3>
+<div class="poster-formula-list">${formulaHtml}</div>
+</div>
+` : ''}
+
+<div class="poster-section-block">
+<h3 class="poster-section-heading">CASE STUDY METADATA</h3>
+<div class="poster-metadata-grid">${metaHtml}</div>
+</div>
+`;
+
+mediaViewerModal.classList.add('active');
+attachCursorEvents();
+}
+
+function closeMediaViewer() {
+mediaViewerModal.classList.remove('active');
+setTimeout(() => {
+mediaViewerBox.innerHTML = '';
+document.getElementById('posterLeftCanvas').innerHTML = '';
+document.getElementById('posterRightPanel').innerHTML = '';
+}, 400);
+}
+
+btnCloseMediaViewer.addEventListener('click', closeMediaViewer);
+btnClosePosterViewer.addEventListener('click', closeMediaViewer);
+mediaViewerModal.addEventListener('click', (e) => {
+if (e.target === mediaViewerModal) closeMediaViewer();
+});
+
+/*
+* 5. REVOLVING 3D CATEGORY CAROUSEL SYSTEM
+*/
+const categories = [
+"POSTERS",
+"PACKAGING",
+"SOCIAL MEDIA",
+"LOGO DESIGN",
+"BRANDING"
+];
+let activeCategoryIndex = 0;
+const carouselTrack = document.getElementById('carouselTrack');
+const currentCatNum = document.getElementById('currentCatNum');
+const totalCatNum = document.getElementById('totalCatNum');
+const btnPrevCategory = document.getElementById('btnPrevCategory');
+const btnNextCategory = document.getElementById('btnNextCategory');
+totalCatNum.textContent = String(categories.length).padStart(2, '0');
+
+function buildCarousel() {
+carouselTrack.innerHTML = '';
+categories.forEach((catName, idx) => {
+const card = document.createElement('div');
+card.className = 'category-card interactive';
+card.setAttribute('data-index', idx);
+let placeholderContent = '';
+if (catName === "POSTERS") {
+placeholderContent = `<img src="https://lh3.googleusercontent.com/d/1zEXTTDgRVvdPXhML0YvsuAAhIfInGaba" alt="Posters Preview" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+} else if (catName === "PACKAGING") {
+placeholderContent = `<img src="https://lh3.googleusercontent.com/d/13ZwP7WMrixf7LnKzbrkzDI7g87A7jSRl" alt="Packaging Preview" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+} else if (catName === "SOCIAL MEDIA") {
+placeholderContent = `<img src="https://lh3.googleusercontent.com/d/18RfopocIudWCjp05jmrYUbnOF1w7rLzr" alt="Social Media Preview" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+} else if (catName === "LOGO DESIGN") {
+placeholderContent = `<img src="https://lh3.googleusercontent.com/d/1cp7_6g5dicVqsO2CJcnYL9QWP9ftrJy0" alt="Logo Design Preview" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+} else if (catName === "BRANDING") {
+placeholderContent = `<img src="https://lh3.googleusercontent.com/d/18qTZRhkggaSvrXtLBu3ldmwkneEp5j7N" alt="Branding Preview" style="width:100%; height:100%; object-fit:cover; display:block;">`;
+} else {
+placeholderContent = `<svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+<rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="1.5"></rect>
+<circle cx="8.5" cy="8.5" r="1.5" stroke-width="1.5"></circle>
+<polyline points="21 15 16 10 5 21" stroke-width="1.5"></polyline>
+</svg>
+<span class="placeholder-text">PLACEHOLDER AREA</span>`;
+}
+card.innerHTML = `
+<div class="card-category-header">
+<span class="card-category-title">${catName}</span>
+<span class="card-category-index">${String(idx + 1).padStart(2, '0')}</span>
+</div>
+<div class="empty-placeholder-area">
+${placeholderContent}
+</div>
+<div class="card-category-footer">
+<span><span class="card-status-dot"></span> AVAILABLE</span>
+<span>PROJECTS &rarr;</span>
+</div>
+`;
+card.addEventListener('click', () => {
+if (activeCategoryIndex !== idx) {
+activeCategoryIndex = idx;
+updateCarouselLayout();
+} else {
+navigateToCategoryGallery(catName);
+}
+});
+carouselTrack.appendChild(card);
+});
+attachCursorEvents();
+}
+buildCarousel();
+
+function updateCarouselLayout() {
+const cards = document.querySelectorAll('.category-card');
+const total = categories.length;
+cards.forEach((card, idx) => {
+let diff = idx - activeCategoryIndex;
+if (diff > total / 2) diff -= total;
+if (diff < -total / 2) diff += total;
+const absDiff = Math.abs(diff);
+if (absDiff > 2) {
+card.style.opacity = '0';
+card.style.visibility = 'hidden';
+card.style.transform = `translateX(${diff * 260}px) translateZ(-400px) rotateY(${diff * -25}deg)`;
+return;
+}
+card.style.visibility = 'visible';
+let translateX = diff * 220;
+let translateZ = -absDiff * 140;
+let rotateY = diff * -22;
+let scale = 1 - absDiff * 0.12;
+let opacity = 1 - absDiff * 0.35;
+let blur = absDiff * 2;
+if (window.innerWidth <= 768) {
+translateX = diff * 150;
+translateZ = -absDiff * 100;
+rotateY = diff * -18;
+}
+card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+card.style.opacity = opacity;
+card.style.filter = blur > 0 ? `blur(${blur}px)` : 'none';
+card.style.zIndex = 10 - absDiff;
+if (diff === 0) {
+card.classList.add('active');
+} else {
+card.classList.remove('active');
+}
+});
+currentCatNum.textContent = String(activeCategoryIndex + 1).padStart(2, '0');
+}
+
+function prevCategory() {
+activeCategoryIndex = (activeCategoryIndex - 1 + categories.length) % categories.length;
+updateCarouselLayout();
+}
+function nextCategory() {
+activeCategoryIndex = (activeCategoryIndex + 1) % categories.length;
+updateCarouselLayout();
+}
+btnPrevCategory.addEventListener('click', prevCategory);
+btnNextCategory.addEventListener('click', nextCategory);
+
+let isScrolling = false;
+const destinationViewContainer = document.getElementById('destinationView');
+destinationViewContainer.addEventListener('wheel', (e) => {
+if (!destinationViewContainer.classList.contains('active-view')) return;
+e.preventDefault();
+if (isScrolling) return;
+isScrolling = true;
+if (e.deltaY > 0) {
+nextCategory();
+} else if (e.deltaY < 0) {
+prevCategory();
+}
+setTimeout(() => {
+isScrolling = false;
+}, 380);
+}, { passive: false });
+
+window.addEventListener('resize', () => {
+if (destinationViewContainer.classList.contains('active-view')) {
+updateCarouselLayout();
+}
+}, { passive: true });
+
+/*
+* 5.1 PORTFOLIO LONG-PAGE SCROLL SYSTEM (EV-01 TO EV-03)
+*/
+const portfolioPageContainer = document.getElementById('portfolioPageContainer');
+const portfolioItemsCount = 3;
+
+function buildPortfolioLongPage() {
+portfolioPageContainer.innerHTML = '';
+for (let i = 0; i < portfolioItemsCount; i++) {
+const section = document.createElement('div');
+section.className = 'portfolio-page-section';
+const card = document.createElement('div');
+card.className = 'orbit-frame-card interactive';
+const titleText = `EV-0${i+1}`;
+let innerContent = `<span class="orbit-placeholder-title">${titleText}</span>`;
+if (i === 0) {
+innerContent = `<img src="https://lh3.googleusercontent.com/d/1JkYp5XAuFb_A4KudwghCj76prqEiB1jh" alt="EV-01" style="width:100%; height:100%; object-fit:contain; border-radius:12px; display:block;">`;
+} else if (i === 1) {
+innerContent = `<img src="https://lh3.googleusercontent.com/d/1Rbo9Vj6ppR3amgAjarAj0CTSioeC0GaG" alt="EV-02" style="width:100%; height:100%; object-fit:contain; border-radius:12px; display:block;">`;
+} else if (i === 2) {
+innerContent = `<img src="https://lh3.googleusercontent.com/d/1hJA6EXQt80pACUj7LTG_VsnsQzGn-eGU" alt="EV-03" style="width:100%; height:100%; object-fit:contain; border-radius:12px; display:block;">`;
+}
+card.innerHTML = `<div class="orbit-card-inner">${innerContent}</div>`;
+section.appendChild(card);
+portfolioPageContainer.appendChild(section);
+
+if (i === 2) {
+const actionSection = document.createElement('div');
+actionSection.className = 'portfolio-action-section';
+const actionBtn = document.createElement('button');
+actionBtn.className = 'btn-primary btn-portfolio-view-work interactive';
+actionBtn.innerHTML = `<span>VIEW WORK</span><span class="arrow-icon">&rarr;</span>`;
+actionBtn.addEventListener('click', (e) => {
+e.preventDefault();
+navigateToDestination();
+});
+actionSection.appendChild(actionBtn);
+portfolioPageContainer.appendChild(actionSection);
+}
+}
+attachCursorEvents();
+setupPortfolioScrollObserver();
+}
+
+function setupPortfolioScrollObserver() {
+const sections = document.querySelectorAll('.portfolio-page-section, .portfolio-action-section');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('is-visible');
+}
+});
+}, { threshold: 0.15 });
+sections.forEach(section => observer.observe(section));
+}
+buildPortfolioLongPage();
+
+/*
+* 6. CONTACT & ABOUT MODAL LOGIC
+*/
+const contactModal = document.getElementById('contactModal');
+const btnCloseContact = document.getElementById('btnCloseContact');
+const contactNavLinks = document.querySelectorAll('.nav-link[data-route="contact"]');
+
+function openContactModal() {
+contactModal.classList.add('active');
+}
+function closeContactModal() {
+contactModal.classList.remove('active');
+}
+contactNavLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault();
+openContactModal();
+});
+});
+btnCloseContact.addEventListener('click', closeContactModal);
+contactModal.addEventListener('click', (e) => {
+if (e.target === contactModal) closeContactModal();
+});
+
+const aboutModal = document.getElementById('aboutModal');
+const btnCloseAbout = document.getElementById('btnCloseAbout');
+const aboutNavLinks = document.querySelectorAll('.nav-link[data-route="about"]');
+
+function openAboutModal() {
+aboutModal.classList.add('active');
+}
+function closeAboutModal() {
+aboutModal.classList.remove('active');
+}
+aboutNavLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault();
+openAboutModal();
+});
+});
+btnCloseAbout.addEventListener('click', closeAboutModal);
+aboutModal.addEventListener('click', (e) => {
+if (e.target === aboutModal) closeAboutModal();
+});
+});
+</script>
+</body>
+</html>
